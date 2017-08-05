@@ -33,3 +33,13 @@ import Foundation
 //      submit button at the bottom of this 2nd view.
 // 11.  Submit saves the pin on the map and pulls up the initial map view again.
 //
+
+struct Constants
+{
+    struct Debug
+    {
+        static let Logging = true
+    }
+    
+}
+
