@@ -14,6 +14,7 @@
 		4DFABCF21AC0CBAC00D21C43 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFABCF01AC0CBAC00D21C43 /* LaunchScreen.xib */; };
 		CF12F9A91F2CD975004D017B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF12F9A81F2CD975004D017B /* LoginView.swift */; };
 		CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4F6C41F2A7B9D003286DE /* Constants.swift */; };
+		CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD03C591F36BBE80001F46E /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		4DFABCF71AC0CBAC00D21C43 /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF12F9A81F2CD975004D017B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CFA4F6C41F2A7B9D003286DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CFD03C591F36BBE80001F46E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		4DFABCE41AC0CBAC00D21C43 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				CFD03C591F36BBE80001F46E /* Common.swift */,
 				CFA4F6C41F2A7B9D003286DE /* Constants.swift */,
 				4DFABCE71AC0CBAC00D21C43 /* AppDelegate.swift */,
 				4DFABCE91AC0CBAC00D21C43 /* MapView.swift */,
@@ -205,6 +208,7 @@
 				4DFABCEA1AC0CBAC00D21C43 /* MapView.swift in Sources */,
 				4DFABCE81AC0CBAC00D21C43 /* AppDelegate.swift in Sources */,
 				CF12F9A91F2CD975004D017B /* LoginView.swift in Sources */,
+				CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */,
 				CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

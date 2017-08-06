@@ -50,29 +50,32 @@
                                                     <constraint firstAttribute="height" constant="50" id="TuM-h3-oNh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="roK-Hc-HRB" userLabel="txtEmail">
                                                 <rect key="frame" x="0.0" y="55" width="250" height="50"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Ce9-PS-uiY"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eME-yn-zwT" userLabel="txtPassword">
                                                 <rect key="frame" x="0.0" y="110" width="250" height="50"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="NVr-tU-MNc"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-0V-Pke" userLabel="btnLogin">
                                                 <rect key="frame" x="0.0" y="165" width="250" height="50"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Nk3-ue-4PX"/>
                                                     <constraint firstAttribute="width" constant="250" id="lDo-SY-lHO"/>
@@ -85,17 +88,22 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwP-Qf-ZGx" userLabel="btnSignup">
                                                 <rect key="frame" x="0.0" y="220" width="250" height="50"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="log-U3-fuk"/>
                                                 </constraints>
                                                 <state key="normal" title="Don't have an account?  Sign Up"/>
+                                                <connections>
+                                                    <action selector="initiateOpenSignupURL:" destination="X7N-bt-3eH" eventType="touchUpInside" id="Ncj-NA-vmT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Q2N-YU-Z3O" firstAttribute="centerY" secondItem="ldy-1E-OEg" secondAttribute="centerY" constant="1" id="9Lj-r7-BtA"/>
                             <constraint firstItem="Q2N-YU-Z3O" firstAttribute="centerX" secondItem="ldy-1E-OEg" secondAttribute="centerX" constant="1" id="PuY-1i-7p9"/>
@@ -108,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1y-ye-vd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1017" y="46"/>
+            <point key="canvasLocation" x="-2177" y="181"/>
         </scene>
         <!--Map View-->
         <scene sceneID="ufC-wZ-h7g">
@@ -148,4 +156,5 @@
     <resources>
         <image name="logo-u" width="62" height="62"/>
     </resources>
+    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -41,5 +41,12 @@ struct Constants
         static let Logging = true
     }
     
+    struct UdacityAPI
+    {
+        static let SignupURL = "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
+        static let UdacitySessionURL = "https://www.udacity.com/api/session"
+        
+    }
+    
 }
 
