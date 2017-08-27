@@ -46,6 +46,16 @@ struct Constants
         static let SignupURL = "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
         static let UdacitySessionURL = "https://www.udacity.com/api/session"
         
+        // MARK: TMDB Response Keys
+        struct ResponseKeys
+        {   static let Account = "account"
+            static let Registered = "registered"
+            static let Key = "key"
+            static let Session = "session"
+            static let Id = "id"
+            static let Expiration = "expiration"
+        }
+        
     }
     
 }

@@ -110,6 +110,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnLogin" destination="Eom-0V-Pke" id="XIj-e4-lAv"/>
+                        <outlet property="btnSignup" destination="KwP-Qf-ZGx" id="FKP-77-UVL"/>
                         <outlet property="txtEmail" destination="roK-Hc-HRB" id="JCI-94-b9G"/>
                         <outlet property="txtPassword" destination="eME-yn-zwT" id="edx-sB-OEK"/>
                     </connections>
@@ -151,6 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-1104" y="170"/>
         </scene>
     </scenes>
     <resources>

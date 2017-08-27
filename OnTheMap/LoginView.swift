@@ -16,7 +16,8 @@ class LoginView: UIViewController, UITextFieldDelegate
      
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var btnSignup: UIButton!
 
     // Login View Controller
     override func viewDidLoad()
@@ -61,7 +62,13 @@ class LoginView: UIViewController, UITextFieldDelegate
         }
         else
         {
-            _ = loginToUdacity( email: txtEmail.text!, password: txtPassword.text! )
+            loginToUdacity( email: txtEmail.text!, password: txtPassword.text! )
+            //{
+            //    //let controller = self.storyboard!.instantiateViewController(withIdentifier: "MoviesTabBarController") as! UITabBarController
+            //    let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapView" )
+            //    self.present(controller, animated: true, completion: nil)
+
+            //}
         }
     
     }
@@ -79,13 +86,15 @@ class LoginView: UIViewController, UITextFieldDelegate
     }
     
     // Login to Udacity
-    func loginToUdacity( email: String, password: String ) -> Bool
+    func loginToUdacity( email: String, password: String )
     {
         if Constants.Debug.Logging
         {
             print ( "LoginView::loginToUdacity()" )
         }
         var loggedIn = false
+        
+        setUIEnabled(false)
         
         //let request = NSMutableURLRequest( url: URL(string: Constants.UdacityAPI.UdacitySessionURL)! )
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
@@ -98,9 +107,20 @@ class LoginView: UIViewController, UITextFieldDelegate
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
+            // if an error occurs, print it and re-enable the UI
+            func displayError(_ error: String)
+            {
+                print( error )
+                performUIUpdatesOnMain
+                {
+                    self.common.showErrorAlert( vc: self, title: "Login Error", message: "Error logging into Udacity, please try again", button_title: "OK" )
+                    self.setUIEnabled(true)
+                }
+            }
+
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                print("There was an error with your request: \(error!)")
+                displayError( "There was an error with your request: \(error!)" )
                 return
             }
             
@@ -113,7 +133,7 @@ class LoginView: UIViewController, UITextFieldDelegate
                 }
                 else
                 {
-                    print("Your request returned a status code other than 2xx: \(statusCode)")
+                    displayError("Your request returned a status code other than 2xx: \(statusCode)")
                     // To do, 403 is bad login, display a message
                     return
                 }
@@ -121,25 +141,46 @@ class LoginView: UIViewController, UITextFieldDelegate
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("No data was returned by the request")
+                displayError( "No data was returned by the request" )
                 return
             }
             
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-            loggedIn = true
- 
+            
+            print ( "LoginView::loginToUdacity() - parsing data" )
+            let parsedResult: [String:AnyObject]!
+            do
+            {
+                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
+            } catch
+            {
+                displayError( "Could not parse the data as JSON: '\(newData)'" )
+                return
+            }
+            
+            /* GUARD: Is the session id key in parsedResult? */
+            guard let sessionDictionary = parsedResult[Constants.UdacityAPI.ResponseKeys.Session] as? [String:AnyObject] else
+            {
+                displayError( "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Session )' in \(parsedResult)" )
+                return
+            }
+            
+            guard let sessionId = sessionDictionary[Constants.UdacityAPI.ResponseKeys.Id] as? String else
+            {
+                displayError( "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Id) ' in \(parsedResult)" )
+                return
+            }
+            
+            print ( "Session ID is: \(sessionId)" )
+            
         }
         
         /* 7. Start the request */
         task.resume()
-        if loggedIn == false
-        {
-            common.showErrorAlert( vc: self, title: "Login Error", message: "Error logging into Udacity, please try again", button_title: "OK" )
-        }
         
-        return loggedIn
+        return
     }
 
     
@@ -235,4 +276,23 @@ class LoginView: UIViewController, UITextFieldDelegate
     //   self.present(alert, animated: true, completion: nil)
     //}
 
+    func setUIEnabled(_ enabled: Bool)
+    {
+        txtEmail.isEnabled = enabled
+        txtPassword.isEnabled = enabled
+        btnLogin.isEnabled = enabled
+        btnSignup.isEnabled = enabled
+        
+        // adjust login button alpha
+        if enabled
+        {
+            btnLogin.alpha = 1.0
+        }
+        else
+        {
+            btnLogin.alpha = 0.5
+        }
+    }
+
+    
 }

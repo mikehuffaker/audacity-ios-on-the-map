@@ -3,7 +3,7 @@
 //  OnTheMap
 //
 //  Created by Mike Huffaker on 8/5/17.
-//  Copyright © 2017 Udacity. All rights reserved.
+//  Copyright © 2017. All rights reserved.
 //
 //  Utlity class with common methods
 
