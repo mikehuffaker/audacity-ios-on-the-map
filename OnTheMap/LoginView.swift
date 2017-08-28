@@ -44,21 +44,17 @@ class LoginView: UIViewController, UITextFieldDelegate
     
     @IBAction func initiateLoginAttempt(_ sender: Any)
     {
-        if Constants.Debug.Logging
-        {
-            print ( "LoginView::initiateLoginAttempt()" )
-            print ( "LoginView::initiateLoginAttempt() - Email entered: \(txtEmail.text!)" )
-            print ( "LoginView::initiateLoginAttempt() - Password entered: \(txtPassword.text!)" )
-        }
+        common.debug( message: "LoginView::initiateLoginAttempt()" )
+        common.debug( message: "LoginView::initiateLoginAttempt() - Email entered: \(txtEmail.text!)" )
+        common.debug( message: "LoginView::initiateLoginAttempt() - Password entered: \(txtPassword.text!)" )
         
-
         if ( txtEmail.text!.isEmpty )
         {
-            common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter an email to log in", button_title: "OK" )
+            common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter a valid email to log in", button_title: "OK" )
         }
         else if ( txtPassword.text!.isEmpty )
         {
-            common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter a password to log in", button_title: "OK" )
+            common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter a valid password to log in", button_title: "OK" )
         }
         else
         {
@@ -88,10 +84,8 @@ class LoginView: UIViewController, UITextFieldDelegate
     // Login to Udacity
     func loginToUdacity( email: String, password: String )
     {
-        if Constants.Debug.Logging
-        {
-            print ( "LoginView::loginToUdacity()" )
-        }
+        common.debug( message: "LoginView::loginToUdacity()" )
+        
         var loggedIn = false
         
         setUIEnabled(false)
@@ -110,7 +104,7 @@ class LoginView: UIViewController, UITextFieldDelegate
             // if an error occurs, print it and re-enable the UI
             func displayError(_ error: String)
             {
-                print( error )
+                self.common.debug( message: error )
                 performUIUpdatesOnMain
                 {
                     self.common.showErrorAlert( vc: self, title: "Login Error", message: "Error logging into Udacity, please try again", button_title: "OK" )
@@ -129,11 +123,11 @@ class LoginView: UIViewController, UITextFieldDelegate
             {
                 if ( statusCode >= 200 && statusCode <= 299 )
                 {
-                    print("Your request returned a non-error status code: \(statusCode)")
+                    self.common.debug( message: "Your request returned a non-error status code: \(statusCode)" )
                 }
                 else
                 {
-                    displayError("Your request returned a status code other than 2xx: \(statusCode)")
+                    displayError( "Your request returned a status code other than 2xx: \(statusCode)" )
                     // To do, 403 is bad login, display a message
                     return
                 }
@@ -147,7 +141,7 @@ class LoginView: UIViewController, UITextFieldDelegate
             
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
-            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
+            self.common.debug( message: NSString( data: newData, encoding: String.Encoding.utf8.rawValue )! as String )
             
             print ( "LoginView::loginToUdacity() - parsing data" )
             let parsedResult: [String:AnyObject]!
@@ -174,6 +168,12 @@ class LoginView: UIViewController, UITextFieldDelegate
             }
             
             print ( "Session ID is: \(sessionId)" )
+            
+            
+            let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
+            //    let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapView" )
+            self.present(controller, animated: true, completion: nil)
+
             
         }
         

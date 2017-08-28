@@ -23,6 +23,7 @@ import MapKit
 
 class MapView: UIViewController, MKMapViewDelegate
 {
+   var common : Common!
     
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
@@ -31,6 +32,9 @@ class MapView: UIViewController, MKMapViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        common = Common()
+        common.debug( message: "MapView::viewDidLoad()" )
         
         // The "locations" array is an array of dictionary objects that are similar to the JSON
         // data that you can download from parse.
@@ -81,6 +85,8 @@ class MapView: UIViewController, MKMapViewDelegate
     // method in TableViewDataSource.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
+        common.debug( message: "MapView::mapView1()" )
+
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -105,6 +111,8 @@ class MapView: UIViewController, MKMapViewDelegate
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
+        common.debug( message: "MapView::mapView2()" )
+
         if control == view.rightCalloutAccessoryView
         {
             let app = UIApplication.shared

@@ -25,4 +25,13 @@ class Common
         
         return
     }
+    
+    // Print messages to console if debug flag is on
+    public func debug( message: String )
+    {
+        if Constants.Debug.Logging
+        {
+            print ( message )
+        }
+    }
 }
