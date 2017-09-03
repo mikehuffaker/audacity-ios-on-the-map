@@ -58,13 +58,21 @@ class LoginView: UIViewController, UITextFieldDelegate
         }
         else
         {
-            loginToUdacity( email: txtEmail.text!, password: txtPassword.text! )
-            //{
-            //    //let controller = self.storyboard!.instantiateViewController(withIdentifier: "MoviesTabBarController") as! UITabBarController
-            //    let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapView" )
-            //    self.present(controller, animated: true, completion: nil)
-
-            //}
+            // Do some checks to make sure the user entered something valid for email and password
+            let emailCheck = txtEmail.text! as NSString
+            let passwordCheck = txtPassword.text! as NSString
+            
+            if ( !emailCheck.contains( "@" ) || emailCheck.contains( "Enter Email" ) )
+            {
+                common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter a valid email to log in", button_title: "OK" )
+            }
+            else if ( passwordCheck.contains( "Enter Password" ) )
+            {
+            }
+            else
+            {
+                loginToUdacity( email: txtEmail.text!, password: txtPassword.text! )
+            }
         }
     
     }
@@ -102,19 +110,19 @@ class LoginView: UIViewController, UITextFieldDelegate
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
             // if an error occurs, print it and re-enable the UI
-            func displayError(_ error: String)
+            func displayError( error: String, debug_error: String )
             {
-                self.common.debug( message: error )
+                self.common.debug( message: debug_error )
                 performUIUpdatesOnMain
                 {
-                    self.common.showErrorAlert( vc: self, title: "Login Error", message: "Error logging into Udacity, please try again", button_title: "OK" )
+                    self.common.showErrorAlert( vc: self, title: "Login Error", message: error, button_title: "OK" )
                     self.setUIEnabled(true)
                 }
             }
 
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                displayError( "There was an error with your request: \(error!)" )
+                displayError( error: "There was a timeout connecting, please check internet connection", debug_error: "\(error!)" )
                 return
             }
             
@@ -127,7 +135,7 @@ class LoginView: UIViewController, UITextFieldDelegate
                 }
                 else
                 {
-                    displayError( "Your request returned a status code other than 2xx: \(statusCode)" )
+                    displayError( error: "Invalid user ID or Password, please try again",  debug_error: "Status code was: \(statusCode)" )
                     // To do, 403 is bad login, display a message
                     return
                 }
@@ -135,7 +143,7 @@ class LoginView: UIViewController, UITextFieldDelegate
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                displayError( "No data was returned by the request" )
+                displayError( error: "There was a problem validating your login", debug_error: "Repoonse Data object was null" )
                 return
             }
             
@@ -150,20 +158,20 @@ class LoginView: UIViewController, UITextFieldDelegate
                 parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
             } catch
             {
-                displayError( "Could not parse the data as JSON: '\(newData)'" )
+                displayError( error: "There was a problem validating your login", debug_error: "Could not parse the data as JSON: '\(newData)'" )
                 return
             }
             
             /* GUARD: Is the session id key in parsedResult? */
             guard let sessionDictionary = parsedResult[Constants.UdacityAPI.ResponseKeys.Session] as? [String:AnyObject] else
             {
-                displayError( "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Session )' in \(parsedResult)" )
+                displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Session )' in \(parsedResult)" )
                 return
             }
             
             guard let sessionId = sessionDictionary[Constants.UdacityAPI.ResponseKeys.Id] as? String else
             {
-                displayError( "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Id) ' in \(parsedResult)" )
+                displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Id) ' in \(parsedResult)" )
                 return
             }
             
