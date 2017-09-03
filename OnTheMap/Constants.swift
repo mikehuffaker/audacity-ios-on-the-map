@@ -48,12 +48,47 @@ struct Constants
         
         // MARK: TMDB Response Keys
         struct ResponseKeys
-        {   static let Account = "account"
+        {
+            // Login/Session API response
+            static let Account = "account"
             static let Registered = "registered"
             static let Key = "key"
             static let Session = "session"
             static let Id = "id"
             static let Expiration = "expiration"
+            
+        }
+        
+    }
+    
+    struct ParseAPI
+    {
+        static let ParseURL = "https://parse.udacity.com/parse/classes/StudentLocation?limit=5"
+        static let ParseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+        static let ParseAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        
+        struct ParameterKeys
+        {
+            // Get parms
+            static let Limit = "limit"
+            static let Order = "order"
+            static let Skip = "skip"
+            static let Where = "where"
+            
+        }
+        
+        struct ResponseKeys
+        {
+            static let CreatedAt = "createdAt"
+            static let FirstName = "firstName"
+            static let LastName = "lastName"
+            static let Latitude = "latitude"
+            static let Longitude = "longitude"
+            static let MapString = "mapString"
+            static let MediaURL = "mediaURL"
+            static let ObjectID = "objectId"
+            static let UniqueKey = "uniqueKey"
+            static let UpdateAt = "updateAt"
         }
         
     }

@@ -16,6 +16,8 @@
 		CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4F6C41F2A7B9D003286DE /* Constants.swift */; };
 		CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD03C591F36BBE80001F46E /* Common.swift */; };
 		CFDA30C21F5372B60064ACFD /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */; };
+		CFDB4D511F5C74B700416CA3 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDB4D501F5C74B700416CA3 /* StudentInformation.swift */; };
+		CFDB4D561F5C8A0500416CA3 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDB4D551F5C8A0500416CA3 /* ParseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 		CFA4F6C41F2A7B9D003286DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CFD03C591F36BBE80001F46E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		CFDB4D501F5C74B700416CA3 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		CFDB4D551F5C8A0500416CA3 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +85,11 @@
 		4DFABCE41AC0CBAC00D21C43 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				CFDB4D541F5C89C300416CA3 /* Utility */,
+				CFDB4D531F5C893000416CA3 /* DataModel */,
+				CFDB4D521F5C88C000416CA3 /* Controllers */,
 				CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */,
-				CFD03C591F36BBE80001F46E /* Common.swift */,
-				CFA4F6C41F2A7B9D003286DE /* Constants.swift */,
 				4DFABCE71AC0CBAC00D21C43 /* AppDelegate.swift */,
-				4DFABCE91AC0CBAC00D21C43 /* MapView.swift */,
-				CF12F9A81F2CD975004D017B /* LoginView.swift */,
 				4DFABCEB1AC0CBAC00D21C43 /* Main.storyboard */,
 				4DFABCEE1AC0CBAC00D21C43 /* Images.xcassets */,
 				4DFABCF01AC0CBAC00D21C43 /* LaunchScreen.xib */,
@@ -101,6 +104,33 @@
 				4DFABCE61AC0CBAC00D21C43 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CFDB4D521F5C88C000416CA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF12F9A81F2CD975004D017B /* LoginView.swift */,
+				4DFABCE91AC0CBAC00D21C43 /* MapView.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		CFDB4D531F5C893000416CA3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				CFDB4D501F5C74B700416CA3 /* StudentInformation.swift */,
+				CFA4F6C41F2A7B9D003286DE /* Constants.swift */,
+				CFDB4D551F5C8A0500416CA3 /* ParseClient.swift */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		CFDB4D541F5C89C300416CA3 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CFD03C591F36BBE80001F46E /* Common.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,11 +238,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFDB4D511F5C74B700416CA3 /* StudentInformation.swift in Sources */,
 				4DFABCEA1AC0CBAC00D21C43 /* MapView.swift in Sources */,
 				4DFABCE81AC0CBAC00D21C43 /* AppDelegate.swift in Sources */,
 				CF12F9A91F2CD975004D017B /* LoginView.swift in Sources */,
 				CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */,
 				CFDA30C21F5372B60064ACFD /* GCDBlackBox.swift in Sources */,
+				CFDB4D561F5C8A0500416CA3 /* ParseClient.swift in Sources */,
 				CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
