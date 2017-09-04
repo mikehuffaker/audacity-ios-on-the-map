@@ -79,6 +79,7 @@ struct Constants
         
         struct ResponseKeys
         {
+            static let Results = "results"
             static let CreatedAt = "createdAt"
             static let FirstName = "firstName"
             static let LastName = "lastName"

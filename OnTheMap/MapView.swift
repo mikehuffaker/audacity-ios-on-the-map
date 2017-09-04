@@ -75,7 +75,11 @@ class MapView: UIViewController, MKMapViewDelegate
         
         // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
-        
+    }
+    override func viewWillAppear(_ animated: Bool )
+    {
+        super.viewWillAppear( animated )
+        common.debug( message: "MapView::viewWillAppear()" )
     }
     
     // MARK: - MKMapViewDelegate
