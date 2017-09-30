@@ -123,19 +123,31 @@
         <!--Item-->
         <scene sceneID="4xM-iN-8Yn">
             <objects>
-                <tableViewController storyboardIdentifier="ListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB9-UD-fBX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EsM-wg-ilt">
+                <tableViewController storyboardIdentifier="ItemVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB9-UD-fBX" customClass="ItemViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EsM-wg-ilt" userLabel="StudentTable">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wTC-Kh-LJm">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="StudentCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" id="wTC-Kh-LJm" userLabel="StudentCell" customClass="StudentCell" customModule="OnTheMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wTC-Kh-LJm" id="Kf4-0i-dmk">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="USd-8g-y83" userLabel="txtStudent">
+                                            <rect key="frame" x="27" y="7" width="362" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="txtStudent" destination="USd-8g-y83" id="sFr-eJ-lpq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -143,19 +155,20 @@
                             <outlet property="delegate" destination="pB9-UD-fBX" id="LBe-BU-5b8"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Yvz-mq-Qun"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="icon_listview-deselected" id="Yvz-mq-Qun"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAh-VV-FTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3088" y="267"/>
+            <point key="canvasLocation" x="-3088.4057971014495" y="266.57608695652175"/>
         </scene>
         <!--MapAndListTabVC-->
         <scene sceneID="wWc-vz-YL4">
             <objects>
                 <tabBarController storyboardIdentifier="MapAndListTabVC" title="MapAndListTabVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="amf-v1-gJP" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="erH-y7-Dbs">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="oU8-Rg-Nix"/>
+                        <barButtonItem key="leftBarButtonItem" title="MapView" id="oU8-Rg-Nix"/>
+                        <barButtonItem key="rightBarButtonItem" title="ItemView" id="4kh-la-uKO"/>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="foj-fK-bRW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -210,6 +223,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_mapview-selected" width="75" height="50"/>
         <image name="logo-u" width="62" height="62"/>

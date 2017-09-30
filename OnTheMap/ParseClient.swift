@@ -26,7 +26,7 @@ class ParseClient : NSObject
     {
         common.debug( message: "ParseClient::loadStudentInformation()" )
         
-        let request = NSMutableURLRequest(url: URL(string: Constants.ParseAPI.ParseURL + "?limit=5")!)
+        let request = NSMutableURLRequest(url: URL(string: Constants.ParseAPI.ParseURL + Constants.ParseAPI.ParameterKeys.Limit)!)
         request.addValue( Constants.ParseAPI.ParseAppID, forHTTPHeaderField: "X-Parse-Application-Id" )
         request.addValue( Constants.ParseAPI.ParseAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -87,6 +87,8 @@ class ParseClient : NSObject
             }
 
             self.students = StudentInformation.loadDictionaryFromResults( results )
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self)
             
         }
         task.resume()

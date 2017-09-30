@@ -13,6 +13,8 @@
 		4DFABCEF1AC0CBAC00D21C43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFABCEE1AC0CBAC00D21C43 /* Images.xcassets */; };
 		4DFABCF21AC0CBAC00D21C43 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFABCF01AC0CBAC00D21C43 /* LaunchScreen.xib */; };
 		CF12F9A91F2CD975004D017B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF12F9A81F2CD975004D017B /* LoginView.swift */; };
+		CF33C9391F7FD677001DCCB4 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33C9381F7FD677001DCCB4 /* ItemView.swift */; };
+		CF33C93D1F7FDE13001DCCB4 /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */; };
 		CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4F6C41F2A7B9D003286DE /* Constants.swift */; };
 		CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD03C591F36BBE80001F46E /* Common.swift */; };
 		CFDA30C21F5372B60064ACFD /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */; };
@@ -40,6 +42,8 @@
 		4DFABCF11AC0CBAC00D21C43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4DFABCF71AC0CBAC00D21C43 /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF12F9A81F2CD975004D017B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CF33C9381F7FD677001DCCB4 /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		CFA4F6C41F2A7B9D003286DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CFD03C591F36BBE80001F46E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
@@ -85,12 +89,12 @@
 		4DFABCE41AC0CBAC00D21C43 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				4DFABCEB1AC0CBAC00D21C43 /* Main.storyboard */,
 				CFDB4D541F5C89C300416CA3 /* Utility */,
 				CFDB4D531F5C893000416CA3 /* DataModel */,
 				CFDB4D521F5C88C000416CA3 /* Controllers */,
 				CFDA30C11F5372B60064ACFD /* GCDBlackBox.swift */,
 				4DFABCE71AC0CBAC00D21C43 /* AppDelegate.swift */,
-				4DFABCEB1AC0CBAC00D21C43 /* Main.storyboard */,
 				4DFABCEE1AC0CBAC00D21C43 /* Images.xcassets */,
 				4DFABCF01AC0CBAC00D21C43 /* LaunchScreen.xib */,
 				4DFABCE51AC0CBAC00D21C43 /* Supporting Files */,
@@ -109,8 +113,10 @@
 		CFDB4D521F5C88C000416CA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CF33C9381F7FD677001DCCB4 /* ItemView.swift */,
 				CF12F9A81F2CD975004D017B /* LoginView.swift */,
 				4DFABCE91AC0CBAC00D21C43 /* MapView.swift */,
+				CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -242,6 +248,8 @@
 				4DFABCEA1AC0CBAC00D21C43 /* MapView.swift in Sources */,
 				4DFABCE81AC0CBAC00D21C43 /* AppDelegate.swift in Sources */,
 				CF12F9A91F2CD975004D017B /* LoginView.swift in Sources */,
+				CF33C9391F7FD677001DCCB4 /* ItemView.swift in Sources */,
+				CF33C93D1F7FDE13001DCCB4 /* StudentCell.swift in Sources */,
 				CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */,
 				CFDA30C21F5372B60064ACFD /* GCDBlackBox.swift in Sources */,
 				CFDB4D561F5C8A0500416CA3 /* ParseClient.swift in Sources */,

@@ -40,6 +40,11 @@ struct Constants
     {
         static let Logging = true
     }
+  
+    struct Notifications
+    {
+        static let StudentDataReloadFinished = "com.mikehuffaker.specialNotificationKey"
+    }
     
     struct UdacityAPI
     {
@@ -63,14 +68,14 @@ struct Constants
     
     struct ParseAPI
     {
-        static let ParseURL = "https://parse.udacity.com/parse/classes/StudentLocation?limit=5"
+        static let ParseURL = "https://parse.udacity.com/parse/classes/StudentLocation"
         static let ParseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let ParseAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         
         struct ParameterKeys
         {
             // Get parms
-            static let Limit = "limit"
+            static let Limit = "?limit=10"
             static let Order = "order"
             static let Skip = "skip"
             static let Where = "where"
