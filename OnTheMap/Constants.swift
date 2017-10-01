@@ -63,7 +63,6 @@ struct Constants
             static let Expiration = "expiration"
             
         }
-        
     }
     
     struct ParseAPI
@@ -75,7 +74,7 @@ struct Constants
         struct ParameterKeys
         {
             // Get parms
-            static let Limit = "?limit=10"
+            static let Limit = "?limit=25"
             static let Order = "order"
             static let Skip = "skip"
             static let Where = "where"

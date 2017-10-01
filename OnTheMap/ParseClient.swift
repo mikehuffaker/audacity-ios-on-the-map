@@ -88,6 +88,9 @@ class ParseClient : NSObject
 
             self.students = StudentInformation.loadDictionaryFromResults( results )
             
+            // Notification that student objects are reloaded, since sometimes it takes a few seconds/
+            // to get data back and the view controllers can know to refresh the views.
+            self.common.debug( message: "ParseClient::loadStudentInformation():Student Information parsed and loaded, notifiying view controllers" )
             NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self)
             
         }

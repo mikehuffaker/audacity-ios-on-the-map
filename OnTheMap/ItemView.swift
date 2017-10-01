@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: - FavoritesTableViewController: UITableViewController
-
 class ItemViewController: UITableViewController {
     
     var common : Common!
@@ -26,28 +24,26 @@ class ItemViewController: UITableViewController {
         common = Common()
         common.debug( message: "ItemView::viewDidLoad()" )
         
-        // Get shared instance of parse client class
+        // Get shared instance of parse client class and initiate load of student data if needed
+        // the map view should already have loaded it, but adding this in case later the app
+        // needs to go straight to the table view.
         parse = ParseClient()
-
-        // get the app delegate
-        //appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        if parse.students.isEmpty
+        {
+            parse.loadStudentInformation()
+        }
         
         // create and set logout button
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(logout))
-        //let tempDictionary = StudentInformation.hardCodedLocationData()
-        //students = StudentInformation.loadDictionaryFromResults(tempDictionary)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
         common.debug( message: "ItemView::viewWillAppear()" )
         
-        parse.loadStudentInformation()
-        students = parse.students
-       
-        self.tableView.reloadData()
+        refreshTable()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -69,6 +65,13 @@ class ItemViewController: UITableViewController {
         cell.txtStudent.text = student.firstName + " " + student.lastName
 
         return cell
+    }
+    
+    func refreshTable()
+    {
+        students = parse.students
+        
+        self.tableView.reloadData()
     }
     
 }

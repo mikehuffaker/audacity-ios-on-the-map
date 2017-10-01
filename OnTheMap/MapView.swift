@@ -28,6 +28,7 @@ class MapView: UIViewController, MKMapViewDelegate
     
    var appDelegate: AppDelegate!
    var students : [StudentInformation] = [StudentInformation]()
+   var annotations = [MKPointAnnotation]()
     
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
@@ -40,29 +41,34 @@ class MapView: UIViewController, MKMapViewDelegate
         common = Common()
         common.debug( message: "MapView::viewDidLoad()" )
         
-        // Get shared instance of parse client class
+        NotificationCenter.default.addObserver(self, selector: #selector( self.refreshMap ), name: NSNotification.Name( rawValue: Constants.Notifications.StudentDataReloadFinished ), object: nil)
+        
+        // Get shared instance of parse client class and initiate load of student data
         parse = ParseClient()
         
-        // The "locations" array is an array of dictionary objects that are similar to the JSON
-        // data that you can download from parse.
-        //let locations = hardCodedLocationData()
-        
-        
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
-        var annotations = [MKPointAnnotation]()
-        
-        // The "locations" array is loaded with the sample data below. We are using the dictionaries
-        // to create map annotations. This would be more stylish if the dictionaries were being
-        // used to create custom structs. Perhaps StudentLocation structs.
-        
-        parse.loadStudentInformation()
+        if parse.students.isEmpty
+        {
+            parse.loadStudentInformation()
+        }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool )
+    {
+        super.viewWillAppear( animated )
+        common.debug( message: "MapView::viewWillAppear()" )
+    }
+    
+    // This method gets called once the PARSE API is done via notification to refresh the map pins
+    func refreshMap()
+    {
+        annotations.removeAll( keepingCapacity: true )
         students = parse.students
         
-        common.debug( message: "MapView::viewDidLoad():Loading students into the Map" )
+        common.debug( message: "MapView::refreshMap():Loading students into the Map" )
         for student in students
         {
-            common.debug( message: "MapView::viewDidLoad():Adding \(student.firstName) to the Map" )
+            common.debug( message: "MapView::refreshMap():Adding \(student.firstName) to the Map" )
             // Notice that the float values are being used to create CLLocationDegree values.
             // This is a version of the Double type.
             let lat = CLLocationDegrees( student.latitude )
@@ -86,15 +92,10 @@ class MapView: UIViewController, MKMapViewDelegate
         }
         
         // When the array is complete, we add the annotations to the map.
-        self.mapView.addAnnotations(annotations)
+        performUIUpdatesOnMain {
+            self.mapView.addAnnotations(self.annotations)
+        }
     }
-    override func viewWillAppear(_ animated: Bool )
-    {
-        super.viewWillAppear( animated )
-        common.debug( message: "MapView::viewWillAppear()" )
-    }
-    
-    // MARK: - MKMapViewDelegate
 
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
@@ -134,72 +135,17 @@ class MapView: UIViewController, MKMapViewDelegate
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle!
             {
-                let options = [UIApplicationOpenURLOptionUniversalLinksOnly : true]
-                app.open( URL(string: toOpen)!, options: options, completionHandler: nil )
+                // Check to avoid errors with some invalid media URLs in student data
+                if toOpen.localizedCaseInsensitiveContains( "http" ) == true
+                {
+                    let options = [:] as [String : Any]
+                    app.open( URL(string: toOpen)!, options: options, completionHandler: nil )
+                }
+                else
+                {
+                    common.showErrorAlert( vc: self, title: "Web Link Error", message: "This Students Pin does not have a valid web URL", button_title: "OK" )
+                }
             }
         }
-    }
-//    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        
-//        if control == annotationView.rightCalloutAccessoryView {
-//            let app = UIApplication.sharedApplication()
-//            app.openURL(NSURL(string: annotationView.annotation.subtitle))
-//        }
-//    }
-
-    // MARK: - Sample Data
-    
-    // Some sample data. This is a dictionary that is more or less similar to the
-    // JSON data that you will download from Parse.
-    
-    func hardCodedLocationData() -> [[String : Any]]
-    {
-        return  [
-            [
-                "createdAt" : "2015-02-24T22:27:14.456Z",
-                "firstName" : "Jessica",
-                "lastName" : "Uelmen",
-                "latitude" : 28.1461248,
-                "longitude" : -82.75676799999999,
-                "mapString" : "Tarpon Springs, FL",
-                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
-                "objectId" : "kj18GEaWD8",
-                "uniqueKey" : 872458750,
-                "updatedAt" : "2015-03-09T22:07:09.593Z"
-            ], [
-                "createdAt" : "2015-02-24T22:35:30.639Z",
-                "firstName" : "Gabrielle",
-                "lastName" : "Miller-Messner",
-                "latitude" : 35.1740471,
-                "longitude" : -79.3922539,
-                "mapString" : "Southern Pines, NC",
-                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
-                "objectId" : "8ZEuHF5uX8",
-                "uniqueKey" : 2256298598,
-                "updatedAt" : "2015-03-11T03:23:49.582Z"
-            ], [
-                "createdAt" : "2015-02-24T22:30:54.442Z",
-                "firstName" : "Jason",
-                "lastName" : "Schatz",
-                "latitude" : 37.7617,
-                "longitude" : -122.4216,
-                "mapString" : "18th and Valencia, San Francisco, CA",
-                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
-                "objectId" : "hiz0vOTmrL",
-                "uniqueKey" : 2362758535,
-                "updatedAt" : "2015-03-10T17:20:31.828Z"
-            ], [
-                "createdAt" : "2015-03-11T02:48:18.321Z",
-                "firstName" : "Jarrod",
-                "lastName" : "Parkes",
-                "latitude" : 34.73037,
-                "longitude" : -86.58611000000001,
-                "mapString" : "Huntsville, Alabama",
-                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
-                "objectId" : "CDHfAy8sdp",
-                "uniqueKey" : 996618664,
-                "updatedAt" : "2015-03-13T03:37:58.389Z"
-            ]
-        ]
     }
 }
