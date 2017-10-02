@@ -74,8 +74,8 @@ struct Constants
         struct ParameterKeys
         {
             // Get parms
-            static let Limit = "?limit=25"
-            static let Order = "order"
+            static let Limit = "limit=100"
+            static let Order = "order=-updatedAt"
             static let Skip = "skip"
             static let Where = "where"
             

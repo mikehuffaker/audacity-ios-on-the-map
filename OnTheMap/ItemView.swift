@@ -12,7 +12,7 @@ import UIKit
 class ItemViewController: UITableViewController {
     
     var common : Common!
-    var parse : ParseClient!
+    var parse = ParseClient.sharedInstance()
     
     var appDelegate: AppDelegate!
     var students : [StudentInformation] = [StudentInformation]()
@@ -27,7 +27,6 @@ class ItemViewController: UITableViewController {
         // Get shared instance of parse client class and initiate load of student data if needed
         // the map view should already have loaded it, but adding this in case later the app
         // needs to go straight to the table view.
-        parse = ParseClient()
         
         if parse.students.isEmpty
         {

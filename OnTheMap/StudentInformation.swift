@@ -55,8 +55,6 @@ struct StudentInformation
         
         updatedAt = dictionary[Constants.ParseAPI.ResponseKeys.UpdateAt] != nil ?
                     dictionary[Constants.ParseAPI.ResponseKeys.UpdateAt] as! String : ""
-        
-        print ( "Student Values: First Name: \(firstName)" )
     }
     
     static func loadDictionaryFromResults(_ results: [[String:AnyObject]]) -> [StudentInformation]

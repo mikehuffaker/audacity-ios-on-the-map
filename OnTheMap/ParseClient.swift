@@ -26,7 +26,12 @@ class ParseClient : NSObject
     {
         common.debug( message: "ParseClient::loadStudentInformation()" )
         
-        let request = NSMutableURLRequest(url: URL(string: Constants.ParseAPI.ParseURL + Constants.ParseAPI.ParameterKeys.Limit)!)
+        let request = NSMutableURLRequest(
+            url: URL( string: Constants.ParseAPI.ParseURL + "?" +
+                Constants.ParseAPI.ParameterKeys.Limit + "&" +
+                Constants.ParseAPI.ParameterKeys.Order
+            )!
+        )
         request.addValue( Constants.ParseAPI.ParseAppID, forHTTPHeaderField: "X-Parse-Application-Id" )
         request.addValue( Constants.ParseAPI.ParseAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         

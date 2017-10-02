@@ -24,7 +24,7 @@ import MapKit
 class MapView: UIViewController, MKMapViewDelegate
 {
    var common : Common!
-   var parse : ParseClient!
+   var parse = ParseClient.sharedInstance()
     
    var appDelegate: AppDelegate!
    var students : [StudentInformation] = [StudentInformation]()
@@ -42,9 +42,6 @@ class MapView: UIViewController, MKMapViewDelegate
         common.debug( message: "MapView::viewDidLoad()" )
         
         NotificationCenter.default.addObserver(self, selector: #selector( self.refreshMap ), name: NSNotification.Name( rawValue: Constants.Notifications.StudentDataReloadFinished ), object: nil)
-        
-        // Get shared instance of parse client class and initiate load of student data
-        parse = ParseClient()
         
         if parse.students.isEmpty
         {

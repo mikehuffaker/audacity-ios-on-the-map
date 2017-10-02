@@ -124,20 +124,20 @@
         <scene sceneID="4xM-iN-8Yn">
             <objects>
                 <tableViewController storyboardIdentifier="ItemVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB9-UD-fBX" customClass="ItemViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EsM-wg-ilt" userLabel="StudentTable">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" id="EsM-wg-ilt" userLabel="StudentTable">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="StudentCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" id="wTC-Kh-LJm" userLabel="StudentCell" customClass="StudentCell" customModule="OnTheMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="StudentCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" rowHeight="57" id="wTC-Kh-LJm" userLabel="StudentCell" customClass="StudentCell" customModule="OnTheMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wTC-Kh-LJm" id="Kf4-0i-dmk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="USd-8g-y83" userLabel="txtStudent">
-                                            <rect key="frame" x="27" y="7" width="362" height="30"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="USd-8g-y83" userLabel="txtStudent">
+                                            <rect key="frame" x="39" y="13" width="337" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -170,6 +170,7 @@
                         <barButtonItem key="leftBarButtonItem" title="MapView" id="oU8-Rg-Nix"/>
                         <barButtonItem key="rightBarButtonItem" title="ItemView" id="4kh-la-uKO"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="foj-fK-bRW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
