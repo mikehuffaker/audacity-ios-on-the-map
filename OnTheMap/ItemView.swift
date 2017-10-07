@@ -12,6 +12,7 @@ import UIKit
 class ItemViewController: UITableViewController {
     
     var common : Common!
+    //var navigationBar : UINavigationBar!
     var parse = ParseClient.sharedInstance()
     
     var appDelegate: AppDelegate!
@@ -33,7 +34,7 @@ class ItemViewController: UITableViewController {
             parse.loadStudentInformation()
         }
         
-        // create and set logout button
+        //let navigationBar =         // create and set logout button
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(logout))
     }
     
@@ -43,6 +44,21 @@ class ItemViewController: UITableViewController {
         common.debug( message: "ItemView::viewWillAppear()" )
         
         refreshTable()
+    }
+    
+    func refreshTable()
+    {
+        students = parse.students
+        
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func logout(_ sender: Any)
+    {
+        common.debug( message: "ItemView::logout()" )
+        let loginVC = self.presentingViewController as! LoginView
+        loginVC.resetUI()
+        dismiss( animated: true, completion: nil )
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -64,13 +80,6 @@ class ItemViewController: UITableViewController {
         cell.txtStudent.text = student.firstName + " " + student.lastName
 
         return cell
-    }
-    
-    func refreshTable()
-    {
-        students = parse.students
-        
-        self.tableView.reloadData()
     }
     
 }

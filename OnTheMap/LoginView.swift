@@ -23,8 +23,8 @@ class LoginView: UIViewController, UITextFieldDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         common = Common()
+        common.debug( message: "LoginView::viewDidLoad()" )
         
         txtEmail.delegate = self
         txtPassword.delegate = self
@@ -36,10 +36,10 @@ class LoginView: UIViewController, UITextFieldDelegate
         
     }
     
-    override func viewDidAppear(_ animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-
+        common.debug( message: "LoginView::viewWillAppear()" )
     }
     
     @IBAction func initiateLoginAttempt(_ sender: Any)
@@ -286,6 +286,7 @@ class LoginView: UIViewController, UITextFieldDelegate
 
     func setUIEnabled(_ enabled: Bool)
     {
+        common.debug( message: "LoginView::setUIEnabled()" )
         txtEmail.isEnabled = enabled
         txtPassword.isEnabled = enabled
         btnLogin.isEnabled = enabled
@@ -302,5 +303,12 @@ class LoginView: UIViewController, UITextFieldDelegate
         }
     }
 
-    
+    func resetUI()
+    {
+        common.debug( message: "LoginView::resetUI()" )
+        setUIEnabled( true )
+        txtEmail.text?.removeAll()
+        txtPassword.text?.removeAll()
+
+    }
 }

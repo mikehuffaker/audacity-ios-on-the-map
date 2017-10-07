@@ -94,6 +94,19 @@ class MapView: UIViewController, MKMapViewDelegate
         }
     }
 
+    @IBAction func logout(_ sender: Any)
+    {
+        common.debug( message: "MapView::logout()" )
+        let loginVC = self.presentingViewController as! LoginView        
+        loginVC.resetUI()
+        dismiss( animated: true, completion: nil )
+    }
+    
+    @IBAction func dropPin(_ sender: Any)
+    {
+        common.debug( message: "MapView::dropPin()" )
+    }
+    
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
     // method in TableViewDataSource.
