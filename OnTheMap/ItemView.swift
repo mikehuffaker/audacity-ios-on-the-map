@@ -53,11 +53,12 @@ class ItemViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    // Logout pressed - go back to login view and have it complete the logout
     @IBAction func logout(_ sender: Any)
     {
         common.debug( message: "ItemView::logout()" )
         let loginVC = self.presentingViewController as! LoginView
-        loginVC.resetUI()
+        loginVC.initiateLogout()
         dismiss( animated: true, completion: nil )
     }
     

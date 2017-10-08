@@ -104,18 +104,18 @@ class MapView: UIViewController, MKMapViewDelegate
         }
     }
 
+    // Logout pressed - go back to login view and have it complete the logout
     @IBAction func logout(_ sender: Any)
     {
         common.debug( message: "MapView::logout()" )
         let loginVC = self.presentingViewController as! LoginView
-        loginVC.resetUI()
+        loginVC.initiateLogout()
         dismiss( animated: true, completion: nil )
     }
     
     @IBAction func dropPin(_ sender: Any)
     {
         common.debug( message: "MapView::dropPin()" )
-
     }
     
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector)

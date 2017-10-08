@@ -52,8 +52,9 @@ class LoginView: UIViewController, UITextFieldDelegate
     {
         performUIUpdatesOnMain
         {
-            self.common.showErrorAlert( vc: self, title: "Data Load Error", message: self.udacity.lastError, button_title: "OK" )
+            self.common.showErrorAlert( vc: self, title: "Udacity Error", message: self.udacity.lastError, button_title: "OK" )
         }
+        
         setUIEnabled( true )
     }
     
@@ -62,6 +63,19 @@ class LoginView: UIViewController, UITextFieldDelegate
     {
         let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    // One of the view controllers is closing and requested a logout
+    @IBAction func initiateLogout()
+    {
+        common.debug( message: "LoginView::initiateLogout()" )
+        
+        if ( !udacity.sessionID.isEmpty )
+        {
+            udacity.logout()
+        }
+        
+        resetUI()
     }
     
     @IBAction func initiateLoginAttempt(_ sender: Any)

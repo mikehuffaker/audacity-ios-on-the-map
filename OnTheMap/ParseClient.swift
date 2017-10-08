@@ -36,7 +36,7 @@ class ParseClient : NSObject
         request.addValue( Constants.ParseAPI.ParseAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+        let task = session.dataTask( with: request as URLRequest) { data, response, error in
             
             // Error handling, set error code, log error if debugging is on, and notify calling View Controller
             func handleError( error: String, debug_error: String )
@@ -54,7 +54,7 @@ class ParseClient : NSObject
             }
             
             /* GUARD: Did we get a successful 2XX response? */
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode
+            if let statusCode = ( response as? HTTPURLResponse )?.statusCode
             {
                 if ( statusCode >= 200 && statusCode <= 299 )
                 {
@@ -74,12 +74,10 @@ class ParseClient : NSObject
                 return
             }
             
-            //print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
-            
             let parsedResult: [String:AnyObject]!
             do
             {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+                parsedResult = try JSONSerialization.jsonObject( with: data, options: .allowFragments ) as! [String:AnyObject]
             } catch
             {
                 handleError( error: "Could not parse the data as JSON'", debug_error: "Could not parse the data as JSON: '\(data)'" )
@@ -97,11 +95,10 @@ class ParseClient : NSObject
 
             self.students = StudentInformation.loadDictionaryFromResults( results )
             
-            // Notification that student objects are reloaded, since sometimes it takes a few seconds/
+            // Notification that student objects are reloaded, since sometimes it takes a few seconds
             // to get data back and the view controllers can know to refresh the views.
             self.common.debug( message: "ParseClient::loadStudentInformation():Student Information parsed and loaded, notifiying view controllers" )
-            NotificationCenter.default.post( name: Notification.Name(rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self)
-            
+            NotificationCenter.default.post( name: Notification.Name( rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self )
         }
         
         task.resume()
