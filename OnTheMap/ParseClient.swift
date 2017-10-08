@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+//import UIKit
 
 class ParseClient : NSObject
 {
@@ -38,16 +38,18 @@ class ParseClient : NSObject
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
-            // if an error occurs, print it and re-enable the UI
-            func displayError( error: String, debug_error: String )
+            // Error handling, set error code, log error if debugging is on, and notify calling View Controller
+            func handleError( error: String, debug_error: String )
             {
                 self.lastError = error
                 self.common.debug( message: debug_error )
+                NotificationCenter.default.post( name: Notification.Name( rawValue: Constants.Notifications.ParseClientError ), object: self )
             }
             
             /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                displayError( error: "There was a timeout connecting, please check internet connection", debug_error: "\(error!)" )
+            guard ( error == nil ) else
+            {
+                handleError( error: "There was a timeout connecting, please check internet connection", debug_error: "\(error!)" )
                 return
             }
             
@@ -60,14 +62,15 @@ class ParseClient : NSObject
                 }
                 else
                 {
-                    displayError( error: "HTTP Error status code returned: \(statusCode)",  debug_error: "Status code was: \(statusCode)" )
+                    handleError( error: "HTTP Error status code returned: \(statusCode)",  debug_error: "Status code was: \(statusCode)" )
                     return
                 }
             }
             
             /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                displayError( error: "There was a problem retrieving the student list", debug_error: "Repoonse Data object was null" )
+            guard let data = data else
+            {
+                handleError( error: "There was a problem retrieving the student list", debug_error: "Repoonse Data object was null" )
                 return
             }
             
@@ -79,15 +82,16 @@ class ParseClient : NSObject
                 parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
             } catch
             {
-                displayError( error: "Could not parse the data as JSON'", debug_error: "Could not parse the data as JSON: '\(data)'" )
+                handleError( error: "Could not parse the data as JSON'", debug_error: "Could not parse the data as JSON: '\(data)'" )
                 return
             }
             
             self.common.debug( message: "Parsed JSON: \(parsedResult)" )
             
             /* GUARD: Is the "results" key in parsedResult? */
-            guard let results = parsedResult[Constants.ParseAPI.ResponseKeys.Results] as? [[String:AnyObject]] else {
-                displayError( error: "Error parsing results", debug_error: "Cannot find key '\(Constants.ParseAPI.ResponseKeys.Results)' in \(parsedResult)")
+            guard let results = parsedResult[Constants.ParseAPI.ResponseKeys.Results] as? [[String:AnyObject]] else
+            {
+                handleError( error: "Error parsing results", debug_error: "Cannot find key '\(Constants.ParseAPI.ResponseKeys.Results)' in \(parsedResult)" )
                 return
             }
 
@@ -96,9 +100,10 @@ class ParseClient : NSObject
             // Notification that student objects are reloaded, since sometimes it takes a few seconds/
             // to get data back and the view controllers can know to refresh the views.
             self.common.debug( message: "ParseClient::loadStudentInformation():Student Information parsed and loaded, notifiying view controllers" )
-            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self)
+            NotificationCenter.default.post( name: Notification.Name(rawValue: Constants.Notifications.StudentDataReloadFinished ), object: self)
             
         }
+        
         task.resume()
     }
     

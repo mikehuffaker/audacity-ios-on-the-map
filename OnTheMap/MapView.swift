@@ -41,19 +41,29 @@ class MapView: UIViewController, MKMapViewDelegate
         common = Common()
         common.debug( message: "MapView::viewDidLoad()" )
         
-        NotificationCenter.default.addObserver(self, selector: #selector( self.refreshMap ), name: NSNotification.Name( rawValue: Constants.Notifications.StudentDataReloadFinished ), object: nil)
+        subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.ParseClientError ), selector: #selector( self.handleParseError ) )
+        subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.StudentDataReloadFinished ), selector: #selector( self.refreshMap ) )
         
+        // Load if empty - once loaded, it can be reloaded and the Map refreshed when a pin is posted.
         if parse.students.isEmpty
         {
             parse.loadStudentInformation()
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool )
     {
         super.viewWillAppear( animated )
         common.debug( message: "MapView::viewWillAppear()" )
+    }
+    
+    // If the PARSE data load has an error, this function will be called to display an alert in the view controller
+    func handleParseError()
+    {
+        performUIUpdatesOnMain
+        {
+            self.common.showErrorAlert( vc: self, title: "Data Load Error", message: self.parse.lastError, button_title: "OK" )
+        }
     }
     
     // This method gets called once the PARSE API is done via notification to refresh the map pins
@@ -97,7 +107,7 @@ class MapView: UIViewController, MKMapViewDelegate
     @IBAction func logout(_ sender: Any)
     {
         common.debug( message: "MapView::logout()" )
-        let loginVC = self.presentingViewController as! LoginView        
+        let loginVC = self.presentingViewController as! LoginView
         loginVC.resetUI()
         dismiss( animated: true, completion: nil )
     }
@@ -105,6 +115,17 @@ class MapView: UIViewController, MKMapViewDelegate
     @IBAction func dropPin(_ sender: Any)
     {
         common.debug( message: "MapView::dropPin()" )
+
+    }
+    
+    func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector)
+    {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    func unsubscribeFromAllNotifications()
+    {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other
@@ -132,7 +153,6 @@ class MapView: UIViewController, MKMapViewDelegate
         
         return pinView
     }
-
     
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.

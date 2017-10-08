@@ -43,7 +43,10 @@ struct Constants
   
     struct Notifications
     {
-        static let StudentDataReloadFinished = "com.mikehuffaker.specialNotificationKey"
+        static let ParseClientError = "com.mikehuffaker.ParseClientErrorNotificationKey"
+        static let StudentDataReloadFinished = "com.mikehuffaker.ParseClientReloadNotificationKey"
+        static let UdacityClientError = "com.mikehuffaker.UdacityClientErrorNotificationKey"
+        static let UdacityLoginComplete = "com.mikehuffaker.UdacityLoginCompleteNotificationKey"
     }
     
     struct UdacityAPI
@@ -61,7 +64,6 @@ struct Constants
             static let Session = "session"
             static let Id = "id"
             static let Expiration = "expiration"
-            
         }
     }
     

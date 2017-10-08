@@ -12,6 +12,8 @@ import Foundation
 class LoginView: UIViewController, UITextFieldDelegate
 {
     var common : Common!
+    var udacity = UdacityClient.sharedInstance()
+    
     var keyboardDisplayed = false
      
     @IBOutlet weak var txtEmail: UITextField!
@@ -34,12 +36,32 @@ class LoginView: UIViewController, UITextFieldDelegate
         subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
         subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
         
+        subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityClientError ), selector: #selector( self.handleUdacityError ) )
+        subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityLoginComplete ), selector: #selector( self.completeLogin ) )
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         common.debug( message: "LoginView::viewWillAppear()" )
+    }
+    
+    // If the Udacity login has an error, this function will be called to display an alert in the view controller and
+    // reenable the fields and controls so the user can try again.
+    func handleUdacityError()
+    {
+        performUIUpdatesOnMain
+        {
+            self.common.showErrorAlert( vc: self, title: "Data Load Error", message: self.udacity.lastError, button_title: "OK" )
+        }
+        setUIEnabled( true )
+    }
+    
+    // If Udacity login returned without errors and a Session ID, then complete login by continuing to the next View.
+    func completeLogin()
+    {
+        let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
+        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func initiateLoginAttempt(_ sender: Any)
@@ -68,18 +90,18 @@ class LoginView: UIViewController, UITextFieldDelegate
             }
             else if ( passwordCheck.contains( "Enter Password" ) )
             {
+                common.showErrorAlert( vc: self, title: "Login Error", message: "You must enter a valid password to log in", button_title: "OK" )
             }
             else
             {
-                loginToUdacity( email: txtEmail.text!, password: txtPassword.text! )
+                setUIEnabled( false )
+                udacity.login( email: txtEmail.text!, password: txtPassword.text! )
             }
         }
-    
     }
     
     @IBAction func initiateOpenSignupURL(_ sender: Any)
     {
-        
         if let url = URL( string: Constants.UdacityAPI.SignupURL )
         {
             if UIApplication.shared.canOpenURL( url )
@@ -90,106 +112,106 @@ class LoginView: UIViewController, UITextFieldDelegate
     }
     
     // Login to Udacity
-    func loginToUdacity( email: String, password: String )
-    {
-        common.debug( message: "LoginView::loginToUdacity()" )
-        
-        var loggedIn = false
-        
-        setUIEnabled(false)
+    //func loginToUdacity( email: String, password: String )
+    //{
+    //    common.debug( message: "LoginView::loginToUdacity()" )
+    //
+    //    var loggedIn = false
+    //
+    //    setUIEnabled(false)
         
         //let request = NSMutableURLRequest( url: URL(string: Constants.UdacityAPI.UdacitySessionURL)! )
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
+    //    let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+    //    request.httpMethod = "POST"
+    //    request.addValue("application/json", forHTTPHeaderField: "Accept")
+    //    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    //    request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
-        let session = URLSession.shared
+    //    let session = URLSession.shared
         
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+    //    let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
             // if an error occurs, print it and re-enable the UI
-            func displayError( error: String, debug_error: String )
-            {
-                self.common.debug( message: debug_error )
-                performUIUpdatesOnMain
-                {
-                    self.common.showErrorAlert( vc: self, title: "Login Error", message: error, button_title: "OK" )
-                    self.setUIEnabled(true)
-                }
-            }
+    //        func displayError( error: String, debug_error: String )
+    //        {
+    //            self.common.debug( message: debug_error )
+    //            performUIUpdatesOnMain
+    //            {
+    //                self.common.showErrorAlert( vc: self, title: "Login Error", message: error, button_title: "OK" )
+    //                self.setUIEnabled(true)
+    //            }
+    //        }
 
             /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                displayError( error: "There was a timeout connecting, please check internet connection", debug_error: "\(error!)" )
-                return
-            }
+    //        guard (error == nil) else {
+    //            displayError( error: "There was a timeout connecting, please check internet connection", debug_error: "\(error!)" )
+    //            return
+    //        }
             
             /* GUARD: Did we get a successful 2XX response? */
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode
-            {
-                if ( statusCode >= 200 && statusCode <= 299 )
-                {
-                    self.common.debug( message: "Your request returned a non-error status code: \(statusCode)" )
-                }
-                else
-                {
-                    displayError( error: "Invalid user ID or Password, please try again",  debug_error: "Status code was: \(statusCode)" )
+    //        if let statusCode = (response as? HTTPURLResponse)?.statusCode
+    //        {
+    //            if ( statusCode >= 200 && statusCode <= 299 )
+    //            {
+    //                self.common.debug( message: "Your request returned a non-error status code: \(statusCode)" )
+    //            }
+    //            else
+    //            {
+    //                displayError( error: "Invalid user ID or Password, please try again",  debug_error: "Status code was: \(statusCode)" )
                     // To do, 403 is bad login, display a message
-                    return
-                }
-            }
+    //                return
+    //            }
+    //        }
             
             /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                displayError( error: "There was a problem validating your login", debug_error: "Repoonse Data object was null" )
-                return
-            }
+    //        guard let data = data else {
+    //            displayError( error: "There was a problem validating your login", debug_error: "Repoonse Data object was null" )
+    //            return
+    //        }
             
-            let range = Range(5..<data.count)
-            let newData = data.subdata(in: range) /* subset response data! */
-            self.common.debug( message: NSString( data: newData, encoding: String.Encoding.utf8.rawValue )! as String )
+    //        let range = Range(5..<data.count)
+    //        let newData = data.subdata(in: range) /* subset response data! */
+    //        self.common.debug( message: NSString( data: newData, encoding: String.Encoding.utf8.rawValue )! as String )
             
-            print ( "LoginView::loginToUdacity() - parsing data" )
-            let parsedResult: [String:AnyObject]!
-            do
-            {
-                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
-            } catch
-            {
-                displayError( error: "There was a problem validating your login", debug_error: "Could not parse the data as JSON: '\(newData)'" )
-                return
-            }
+    //        print ( "LoginView::loginToUdacity() - parsing data" )
+    //        let parsedResult: [String:AnyObject]!
+    //        do
+    //        {
+    //            parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
+    //        } catch
+    //        {
+    //            displayError( error: "There was a problem validating your login", debug_error: "Could not parse the data as JSON: '\(newData)'" )
+    //            return
+    //        }
             
             /* GUARD: Is the session id key in parsedResult? */
-            guard let sessionDictionary = parsedResult[Constants.UdacityAPI.ResponseKeys.Session] as? [String:AnyObject] else
-            {
-                displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Session )' in \(parsedResult)" )
-                return
-            }
+    //        guard let sessionDictionary = parsedResult[Constants.UdacityAPI.ResponseKeys.Session] as? [String:AnyObject] else
+    //        {
+    //            displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Session )' in \(parsedResult)" )
+    //            return
+    //        }
             
-            guard let sessionId = sessionDictionary[Constants.UdacityAPI.ResponseKeys.Id] as? String else
-            {
-                displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Id) ' in \(parsedResult)" )
-                return
-            }
+    //        guard let sessionId = sessionDictionary[Constants.UdacityAPI.ResponseKeys.Id] as? String else
+    //        {
+    //            displayError( error: "There was a problem validating your login", debug_error: "Cannot find key '\(Constants.UdacityAPI.ResponseKeys.Id) ' in \(parsedResult)" )
+    //            return
+    //        }
             
-            print ( "Session ID is: \(sessionId)" )
+    //        print ( "Session ID is: \(sessionId)" )
             
             
-            let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
+     //       let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
             //    let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapView" )
-            self.present(controller, animated: true, completion: nil)
+     //       self.present(controller, animated: true, completion: nil)
 
             
-        }
+    //    }
         
         /* 7. Start the request */
-        task.resume()
+    //    task.resume()
         
-        return
-    }
+    //    return
+    //}
 
     
     // Keyboard Notification setup
@@ -271,19 +293,6 @@ class LoginView: UIViewController, UITextFieldDelegate
         resignIfFirstResponder(txtPassword)
     }
     
-    //
-  //  func showErrorAlert ( title: String, message: String, button_title: String )
-   // {
-        // create the alert
-   //     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    
-        // add an action (button)
-   //     alert.addAction(UIAlertAction(title: button_title, style: UIAlertActionStyle.default, handler: nil))
-    
-        // show the alert
-    //   self.present(alert, animated: true, completion: nil)
-    //}
-
     func setUIEnabled(_ enabled: Bool)
     {
         common.debug( message: "LoginView::setUIEnabled()" )

@@ -185,7 +185,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="1cg-qh-Pyv"/>
+                        <segue destination="RMP-bj-Poo" kind="relationship" relationship="viewControllers" id="1cg-qh-Pyv"/>
                         <segue destination="Yfd-xy-xNq" kind="relationship" relationship="viewControllers" id="XNL-0d-ftk"/>
                     </connections>
                 </tabBarController>
@@ -193,7 +193,7 @@
             </objects>
             <point key="canvasLocation" x="-3088" y="-488"/>
         </scene>
-        <!--Map-->
+        <!--Map View-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController storyboardIdentifier="MapVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="MapView" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -205,28 +205,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85Z-O0-lcm">
-                                <rect key="frame" x="-5" y="20" width="414" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="DBo-Wb-1CW"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="On The Map" id="rz2-Hb-bxC">
-                                        <barButtonItem key="leftBarButtonItem" image="icon_refresh" id="rgh-H5-cgs" userLabel="Logout">
-                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="logout:" destination="vXZ-lx-hvc" id="4hb-57-6gf"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="icon_pin" id="Uya-tr-OL5" userLabel="DropPin">
-                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="dropPin:" destination="vXZ-lx-hvc" id="Zac-sI-5y9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wsC-T6-DjN">
                                 <rect key="frame" x="5" y="70" width="404" height="609"/>
                                 <connections>
@@ -238,14 +216,22 @@
                         <constraints>
                             <constraint firstItem="wsC-T6-DjN" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="2Vy-IS-py0"/>
                             <constraint firstItem="wsC-T6-DjN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-15" id="2xq-37-GS9"/>
-                            <constraint firstItem="85Z-O0-lcm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-25" id="86r-J2-dr9"/>
+                            <constraint firstItem="wsC-T6-DjN" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="6" id="OdP-Ws-Fe8"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="wsC-T6-DjN" secondAttribute="bottom" constant="8" symbolic="YES" id="Qqc-9a-Juy"/>
-                            <constraint firstItem="85Z-O0-lcm" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="VyG-97-4w7"/>
-                            <constraint firstItem="85Z-O0-lcm" firstAttribute="trailing" secondItem="wsC-T6-DjN" secondAttribute="trailing" id="vKk-ul-eQ2"/>
-                            <constraint firstItem="wsC-T6-DjN" firstAttribute="top" secondItem="85Z-O0-lcm" secondAttribute="bottom" symbolic="YES" id="vbj-Ce-V3Y"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" selectedImage="icon_mapview-selected" id="vMf-Ml-9Ed"/>
+                    <navigationItem key="navigationItem" id="j3F-W8-t9q">
+                        <barButtonItem key="leftBarButtonItem" image="icon_refresh" id="70P-ll-zfA" userLabel="Logout">
+                            <connections>
+                                <action selector="logout:" destination="vXZ-lx-hvc" id="OFZ-Mv-v8E"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="icon_pin" id="Nc2-sp-tbO" userLabel="DropPin">
+                            <connections>
+                                <action selector="dropPin:" destination="vXZ-lx-hvc" id="LEd-gF-Llp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="wsC-T6-DjN" id="qdk-b8-F4r"/>
@@ -253,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2183" y="-488"/>
+            <point key="canvasLocation" x="-1276.8115942028987" y="-488.31521739130437"/>
         </scene>
         <!--Item-->
         <scene sceneID="sjq-O5-LM8">
@@ -273,6 +259,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Hw-Xo-ERl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3088.4057971014495" y="266.57608695652175"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="wVt-Li-Xbp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RMP-bj-Poo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" selectedImage="icon_mapview-selected" id="vMf-Ml-9Ed"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hWq-1y-mG6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="qy9-DD-hya"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pof-Y8-Lvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2184.057971014493" y="-488.31521739130437"/>
         </scene>
     </scenes>
     <resources>
