@@ -65,8 +65,15 @@ struct StudentInformation
         for student in results
         {
             print ( "Loading students: \( student["firstName"] ) " )
-            students.append( StudentInformation( dictionary: student ) )
+            
+            // Null check - some garbage data is being posted with null names, avoid loading those
+            if ( student[Constants.ParseAPI.ResponseKeys.FirstName] != nil &&
+                !(student[Constants.ParseAPI.ResponseKeys.FirstName] as! String).isEmpty )
+            {
+                students.append( StudentInformation( dictionary: student ) )
+            }
         }
+        print ( "Total loaded: \(students.count)" )
         
         return students
     }

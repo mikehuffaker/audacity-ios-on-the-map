@@ -134,7 +134,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wTC-Kh-LJm" id="Kf4-0i-dmk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="USd-8g-y83" userLabel="txtStudent">
@@ -158,11 +158,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="wdt-N2-euG">
                         <barButtonItem key="leftBarButtonItem" image="icon_refresh" id="QRY-Cb-3q6" userLabel="Logout">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout:" destination="pB9-UD-fBX" id="U0P-ta-sK4"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_pin" id="FZq-Df-oZ7" userLabel="DropPin"/>
+                        <barButtonItem key="rightBarButtonItem" image="icon_pin" id="FZq-Df-oZ7" userLabel="DropPin">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -222,11 +225,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="j3F-W8-t9q">
                         <barButtonItem key="leftBarButtonItem" image="icon_refresh" id="70P-ll-zfA" userLabel="Logout">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout:" destination="vXZ-lx-hvc" id="OFZ-Mv-v8E"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_pin" id="Nc2-sp-tbO" userLabel="DropPin">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="dropPin:" destination="vXZ-lx-hvc" id="LEd-gF-Llp"/>
                             </connections>
@@ -278,6 +283,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pof-Y8-Lvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2184.057971014493" y="-488.31521739130437"/>
+        </scene>
+        <!--Drop Pin Start View-->
+        <scene sceneID="HnP-ch-jgK">
+            <objects>
+                <viewController storyboardIdentifier="DropPinStartView" id="nvX-h2-GT9" customClass="DropPinStartView" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JCp-Jr-RSO"/>
+                        <viewControllerLayoutGuide type="bottom" id="tg8-Vz-xjJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fbv-EW-iPR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RLs-96-A1O" userLabel="StackViewMain">
+                                <rect key="frame" x="30" y="28" width="354" height="700"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Where are you Studying Today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-YD-T4A" userLabel="lblLocationPrompt">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="230"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Your Location Here" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T8w-Bg-4sC" userLabel="txtLocation">
+                                        <rect key="frame" x="0.0" y="235" width="354" height="230"/>
+                                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bnL-JR-2Hd">
+                                        <rect key="frame" x="0.0" y="470" width="354" height="230"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCI-14-4S6" userLabel="btnGeocodeLocation">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="115"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <state key="normal" title="Find on the Map"/>
+                                                <connections>
+                                                    <action selector="initiateGeocode:" destination="nvX-h2-GT9" eventType="touchUpInside" id="jnW-6c-hPR"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xf-g6-3Td" userLabel="btnCancel">
+                                                <rect key="frame" x="0.0" y="115" width="354" height="115"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <state key="normal" title="Cancel"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tg8-Vz-xjJ" firstAttribute="top" secondItem="RLs-96-A1O" secondAttribute="bottom" constant="8" symbolic="YES" id="1QI-be-aHH"/>
+                            <constraint firstItem="RLs-96-A1O" firstAttribute="leading" secondItem="Fbv-EW-iPR" secondAttribute="leadingMargin" constant="10" id="3jR-7L-Kae"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RLs-96-A1O" secondAttribute="trailing" constant="10" id="iQp-jY-YZo"/>
+                            <constraint firstItem="RLs-96-A1O" firstAttribute="top" secondItem="JCp-Jr-RSO" secondAttribute="bottom" constant="8" symbolic="YES" id="uXm-Qt-VxQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnCancel" destination="9xf-g6-3Td" id="Gre-q8-olQ"/>
+                        <outlet property="btnGeocodeLocation" destination="LCI-14-4S6" id="ffJ-Zu-1NT"/>
+                        <outlet property="lblLocationPrompt" destination="wpY-YD-T4A" id="EEb-qR-6Nw"/>
+                        <outlet property="txtLocation" destination="T8w-Bg-4sC" id="5Vo-hI-ACb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37M-wi-ZyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3088" y="1018"/>
         </scene>
     </scenes>
     <resources>
