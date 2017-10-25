@@ -49,37 +49,15 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     // If the Udacity login has an error, this function will be called to display an alert in the view controller and
     // reenable the fields and controls so the user can try again.
-    func handleUdacityError()
-    {
-        performUIUpdatesOnMain
-            {
-                self.common.showErrorAlert( vc: self, title: "Udacity Error", message: self.udacity.lastError, button_title: "OK" )
-        }
-        
-        setUIEnabled( true )
-    }
-    
-    // If Udacity login returned without errors and a Session ID, then complete login by continuing to the next View.
-    //func completeLogin()
+    //func handleUdacityError()
     //{
-    //    let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
-        //self.present(controller, animated: true, completion: nil)
-    //}
-    
-    // One of the view controllers is closing and requested a logout
-    //@IBAction func initiateLogout()
-    //{
-    //    common.debug( message: "LoginView::initiateLogout()" )
-        
-    //    if ( !udacity.sessionID.isEmpty )
+    //    performUIUpdatesOnMain
     //    {
-     //       udacity.logout()
+    //        self.common.showErrorAlert( vc: self, title: "Udacity Error", message: self.udacity.lastError, button_title: "OK" )
     //    }
-        
-    //    resetUI()
+    //
+    //    setUIEnabled( true )
     //}
-    
-    
     
     @IBAction func initiateGeocode(_ sender: Any)
     {
@@ -105,11 +83,19 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
                     let placemark = placemarks![0]
                     let location = placemark.location
                     self.common.debug( message: "Geocode Lon: \(location?.coordinate.longitude)" )
-                    self.common.debug( message: "Geocode Lon: \(location?.coordinate.longitude)" )
+                    self.common.debug( message: "Geocode Lat: \(location?.coordinate.latitude )" )
+                    
+                    // Transition to Map View.
                 }
             }
             )
         }
+    }
+    
+    @IBAction func cancel(_ sender: Any)
+    {
+        common.debug( message: "DropPinStartView::cancel()" )
+        self.dismiss( animated: true )
     }
     
     // Keyboard Notification setup
@@ -192,7 +178,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func setUIEnabled(_ enabled: Bool)
     {
-        common.debug( message: "LoginView::setUIEnabled()" )
+        common.debug( message: "DropPinStartView::setUIEnabled()" )
         txtLocation.isEnabled = enabled
         btnGeocodeLocation.isEnabled = enabled
         btnCancel.isEnabled = enabled
@@ -212,10 +198,9 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func resetUI()
     {
-        common.debug( message: "LoginView::resetUI()" )
+        common.debug( message: "DropPinStartView::resetUI()" )
         setUIEnabled( true )
         txtLocation.text?.removeAll()
-        
     }
 }
 

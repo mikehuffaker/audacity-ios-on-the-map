@@ -16,6 +16,7 @@
 		CF1590391F8A5806005C0F04 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1590381F8A5806005C0F04 /* UdacityClient.swift */; };
 		CF33C9391F7FD677001DCCB4 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33C9381F7FD677001DCCB4 /* ItemView.swift */; };
 		CF33C93D1F7FDE13001DCCB4 /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */; };
+		CF3CD76C1FA0CAD000E4CF60 /* DropPinMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CD76B1FA0CAD000E4CF60 /* DropPinMapView.swift */; };
 		CF5671B01F93A74E002D1E13 /* DropPinStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5671AF1F93A74E002D1E13 /* DropPinStartView.swift */; };
 		CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4F6C41F2A7B9D003286DE /* Constants.swift */; };
 		CFD03C5A1F36BBE80001F46E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD03C591F36BBE80001F46E /* Common.swift */; };
@@ -47,6 +48,7 @@
 		CF1590381F8A5806005C0F04 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		CF33C9381F7FD677001DCCB4 /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
+		CF3CD76B1FA0CAD000E4CF60 /* DropPinMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropPinMapView.swift; sourceTree = "<group>"; };
 		CF5671AF1F93A74E002D1E13 /* DropPinStartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropPinStartView.swift; sourceTree = "<group>"; };
 		CFA4F6C41F2A7B9D003286DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CFD03C591F36BBE80001F46E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				4DFABCE91AC0CBAC00D21C43 /* MapView.swift */,
 				CF33C93C1F7FDE13001DCCB4 /* StudentCell.swift */,
 				CF5671AF1F93A74E002D1E13 /* DropPinStartView.swift */,
+				CF3CD76B1FA0CAD000E4CF60 /* DropPinMapView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				CFDB4D561F5C8A0500416CA3 /* ParseClient.swift in Sources */,
 				CF5671B01F93A74E002D1E13 /* DropPinStartView.swift in Sources */,
 				CFA4F6C51F2A7B9D003286DE /* Constants.swift in Sources */,
+				CF3CD76C1FA0CAD000E4CF60 /* DropPinMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
