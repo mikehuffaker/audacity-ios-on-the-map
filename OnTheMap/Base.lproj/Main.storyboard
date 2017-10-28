@@ -134,7 +134,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wTC-Kh-LJm" id="Kf4-0i-dmk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="USd-8g-y83" userLabel="txtStudent">
@@ -374,23 +374,23 @@
                                 <rect key="frame" x="30" y="28" width="354" height="700"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Link to Share Here" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-Wl-khd" userLabel="txtShareLink">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="30.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wFI-vc-SM9">
-                                        <rect key="frame" x="0.0" y="35.333333333333314" width="354" height="577"/>
+                                        <rect key="frame" x="0.0" y="35" width="354" height="578"/>
                                         <connections>
                                             <outlet property="delegate" destination="tu8-p9-OOB" id="k8f-en-3hj"/>
                                         </connections>
                                     </mapView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zM6-pU-Ftm">
-                                        <rect key="frame" x="0.0" y="617.33333333333348" width="354" height="82.666666666666629"/>
+                                        <rect key="frame" x="0.0" y="618" width="354" height="82"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-mz-1Mm" userLabel="btnGeocodeLocation">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="41.333333333333258"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="41"/>
                                                 <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="Post to Map"/>
@@ -399,12 +399,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20v-hR-czi" userLabel="btnCancel">
-                                                <rect key="frame" x="0.0" y="41.333333333333258" width="354" height="41.333333333333371"/>
+                                                <rect key="frame" x="0.0" y="41" width="354" height="41"/>
                                                 <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
-                                                    <action selector="cancel:" destination="tu8-p9-OOB" eventType="touchUpInside" id="g2A-1B-xNa"/>
+                                                    <action selector="cancel:" destination="tu8-p9-OOB" eventType="touchUpInside" id="tY0-MI-wIg"/>
                                                 </connections>
                                             </button>
                                         </subviews>

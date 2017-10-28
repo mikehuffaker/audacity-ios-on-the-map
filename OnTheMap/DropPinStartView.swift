@@ -86,6 +86,11 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
                     self.common.debug( message: "Geocode Lat: \(location?.coordinate.latitude )" )
                     
                     // Transition to Map View.
+                    let controller = self.storyboard!.instantiateViewController( withIdentifier: "DropPinMapVC" )
+                    let dpmvController = controller as! DropPinMapView
+                    dpmvController.dropPinCoordinate = (location?.coordinate)!
+                    
+                    self.present(controller, animated: true, completion: nil)
                 }
             }
             )
