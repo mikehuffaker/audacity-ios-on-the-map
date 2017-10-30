@@ -11,11 +11,14 @@ import Foundation
 
 class LoginView: UIViewController, UITextFieldDelegate
 {
+    // Classes
     var common : Common!
     var udacity = UdacityClient.sharedInstance()
     
+    // Variables
     var keyboardDisplayed = false
-     
+    
+    // Outlets for view objects
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
@@ -50,6 +53,8 @@ class LoginView: UIViewController, UITextFieldDelegate
     // reenable the fields and controls so the user can try again.
     func handleUdacityError()
     {
+        common.debug( message: "LoginView::handleUdacityError()" )
+
         performUIUpdatesOnMain
         {
             self.common.showErrorAlert( vc: self, title: "Udacity Error", message: self.udacity.lastError, button_title: "OK" )
@@ -61,6 +66,8 @@ class LoginView: UIViewController, UITextFieldDelegate
     // If Udacity login returned without errors and a Session ID, then complete login by continuing to the next View.
     func completeLogin()
     {
+        common.debug( message: "LoginView::completeLogin()" )
+
         let controller = self.storyboard!.instantiateViewController( withIdentifier: "MapAndListTabVC" ) as! UITabBarController
         self.present(controller, animated: true, completion: nil)
     }
@@ -116,6 +123,8 @@ class LoginView: UIViewController, UITextFieldDelegate
     
     @IBAction func initiateOpenSignupURL(_ sender: Any)
     {
+        common.debug( message: "LoginView::initiateOpenSignupURL()" )
+
         if let url = URL( string: Constants.UdacityAPI.SignupURL )
         {
             if UIApplication.shared.canOpenURL( url )
@@ -332,6 +341,5 @@ class LoginView: UIViewController, UITextFieldDelegate
         setUIEnabled( true )
         txtEmail.text?.removeAll()
         txtPassword.text?.removeAll()
-
     }
 }

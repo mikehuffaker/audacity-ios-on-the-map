@@ -13,11 +13,13 @@ import CoreLocation
 
 class DropPinStartView: UIViewController, UITextFieldDelegate
 {
+    // Classes
     var common : Common!
-    var udacity = UdacityClient.sharedInstance()
     
+    // Variables
     var keyboardDisplayed = false
     
+    // Outlets for view objects
     @IBOutlet weak var lblLocationPrompt: UILabel!
     @IBOutlet weak var txtLocation: UITextField!
     @IBOutlet weak var btnGeocodeLocation: UIButton!
@@ -37,13 +39,20 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
         subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
         subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
         
+        // Hide the navigation controller bars for this screen
+        if let navigationController = navigationController
+        {
+            navigationController.isToolbarHidden = true
+            navigationController.isNavigationBarHidden = true
+        }
+        
         //subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityClientError ), selector: #selector( self.handleUdacityError ) )
         //subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityLoginComplete ), selector: #selector( self.completeLogin ) )
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
-        super.viewWillAppear(animated)
+        super.viewWillAppear( animated )
         common.debug( message: "DropPinStartView::viewWillAppear()" )
     }
     
@@ -88,9 +97,13 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
                     // Transition to Map View.
                     let controller = self.storyboard!.instantiateViewController( withIdentifier: "DropPinMapVC" )
                     let dpmvController = controller as! DropPinMapView
-                    dpmvController.dropPinCoordinate = (location?.coordinate)!
+                    dpmvController.dropPinCoordinate = ( location?.coordinate )!
                     
-                    self.present(controller, animated: true, completion: nil)
+                    print ( "going to map drop pin view " )
+                    if let navigationController = self.navigationController
+                    {
+                        navigationController.pushViewController( controller, animated: true )
+                    }
                 }
             }
             )
@@ -100,18 +113,24 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     @IBAction func cancel(_ sender: Any)
     {
         common.debug( message: "DropPinStartView::cancel()" )
-        self.dismiss( animated: true )
+        
+        // Pop back to Drop Pin Start view ( Enter location )
+        if let navigationController = navigationController
+        {
+            navigationController.isNavigationBarHidden = false
+            navigationController.popViewController( animated: true )
+        }
     }
     
     // Keyboard Notification setup
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector)
     {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+        NotificationCenter.default.addObserver( self, selector: selector, name: notification, object: nil )
     }
     
     func unsubscribeFromAllNotifications()
     {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver( self )
     }
     
     // Text Field Delegate
@@ -139,7 +158,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     {
         if !keyboardDisplayed
         {
-            view.frame.origin.y -= keyboardHeight(notification)
+            view.frame.origin.y -= keyboardHeight( notification )
         }
     }
     
@@ -147,7 +166,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     {
         if keyboardDisplayed
         {
-            view.frame.origin.y += keyboardHeight(notification)
+            view.frame.origin.y += keyboardHeight( notification )
         }
     }
     
@@ -163,7 +182,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func keyboardHeight(_ notification: Notification) -> CGFloat
     {
-        let userInfo = (notification as NSNotification).userInfo
+        let userInfo = ( notification as NSNotification ).userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
@@ -178,7 +197,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     @IBAction func userDidTapView(_ sender: AnyObject)
     {
-        resignIfFirstResponder(txtLocation)
+        resignIfFirstResponder( txtLocation )
     }
     
     func setUIEnabled(_ enabled: Bool)

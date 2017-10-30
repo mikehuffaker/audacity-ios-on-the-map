@@ -23,12 +23,13 @@ import MapKit
 
 class MapView: UIViewController, MKMapViewDelegate
 {
-   var common : Common!
-   var parse = ParseClient.sharedInstance()
+    // Classes
+    var common : Common!
+    var parse = ParseClient.sharedInstance()
     
-   var appDelegate: AppDelegate!
-   var students : [StudentInformation] = [StudentInformation]()
-   var annotations = [MKPointAnnotation]()
+    // Varables
+    var students : [StudentInformation] = [StudentInformation]()
+    var annotations = [MKPointAnnotation]()
     
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
@@ -60,6 +61,8 @@ class MapView: UIViewController, MKMapViewDelegate
     // If the PARSE data load has an error, this function will be called to display an alert in the view controller
     func handleParseError()
     {
+        common.debug( message: "MapView::handleParseError()" )
+        
         performUIUpdatesOnMain
         {
             self.common.showErrorAlert( vc: self, title: "Data Load Error", message: self.parse.lastError, button_title: "OK" )
@@ -69,9 +72,11 @@ class MapView: UIViewController, MKMapViewDelegate
     // This method gets called once the PARSE API is done via notification to refresh the map pins
     func refreshMap()
     {
+        common.debug( message: "MapView::refreshMap()" )
+        
         annotations.removeAll( keepingCapacity: true )
         students = parse.students
-        
+
         common.debug( message: "MapView::refreshMap():Loading students into the Map" )
         for student in students
         {
@@ -82,7 +87,7 @@ class MapView: UIViewController, MKMapViewDelegate
             let long = CLLocationDegrees( student.longitude )
             
             // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            let coordinate = CLLocationCoordinate2D( latitude: lat, longitude: long )
             
             let first = student.firstName
             let last = student.lastName
@@ -95,12 +100,13 @@ class MapView: UIViewController, MKMapViewDelegate
             annotation.subtitle = mediaURL
             
             // Finally we place the annotation in an array of annotations.
-            annotations.append(annotation)
+            annotations.append( annotation )
         }
         
         // When the array is complete, we add the annotations to the map.
-        performUIUpdatesOnMain {
-            self.mapView.addAnnotations(self.annotations)
+        performUIUpdatesOnMain
+        {
+            self.mapView.addAnnotations( self.annotations )
         }
     }
 
@@ -116,18 +122,22 @@ class MapView: UIViewController, MKMapViewDelegate
     @IBAction func dropPin(_ sender: Any)
     {
         common.debug( message: "MapView::dropPin()" )
-        let controller = self.storyboard!.instantiateViewController( withIdentifier: "DropPinStartVC" ) 
-        self.present(controller, animated: true, completion: nil)
+        let controller = self.storyboard!.instantiateViewController( withIdentifier: "DropPinStartVC" )
+        
+        if let navigationController = navigationController
+        {
+            navigationController.pushViewController( controller, animated: true )
+        }
     }
     
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector)
     {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+        NotificationCenter.default.addObserver( self, selector: selector, name: notification, object: nil )
     }
     
     func unsubscribeFromAllNotifications()
     {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver( self )
     }
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other
@@ -138,15 +148,14 @@ class MapView: UIViewController, MKMapViewDelegate
         common.debug( message: "MapView::mapView1()" )
 
         let reuseId = "pin"
-        
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView( withIdentifier: reuseId ) as? MKPinAnnotationView
 
         if pinView == nil
         {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKPinAnnotationView( annotation: annotation, reuseIdentifier: reuseId )
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            pinView!.rightCalloutAccessoryView = UIButton( type: .detailDisclosure )
         }
         else
         {

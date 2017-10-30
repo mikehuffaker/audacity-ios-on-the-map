@@ -9,47 +9,41 @@
 import Foundation
 import UIKit
 
-class ItemViewController: UITableViewController {
-    
+class ItemViewController: UITableViewController
+{   
+    // Classes
     var common : Common!
-    //var navigationBar : UINavigationBar!
     var parse = ParseClient.sharedInstance()
     
-    var appDelegate: AppDelegate!
+    // Variables
     var students : [StudentInformation] = [StudentInformation]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         common = Common()
         common.debug( message: "ItemView::viewDidLoad()" )
         
         // Get shared instance of parse client class and initiate load of student data if needed
         // the map view should already have loaded it, but adding this in case later the app
         // needs to go straight to the table view.
-        
         if parse.students.isEmpty
         {
             parse.loadStudentInformation()
         }
-        
-        //let navigationBar =         // create and set logout button
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(logout))
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
-        super.viewWillAppear(animated)
+        super.viewWillAppear( animated )
         common.debug( message: "ItemView::viewWillAppear()" )
-        
         refreshTable()
     }
     
     func refreshTable()
     {
+        common.debug( message: "ItemView::refreshTable()" )
         students = parse.students
-        
         self.tableView.reloadData()
     }
     
@@ -75,12 +69,9 @@ class ItemViewController: UITableViewController {
         //let cellReuseIdentifier = "StudentTableViewCell"
         let cellID = "StudentCell"
         let cell:StudentCell = tableView.dequeueReusableCell( withIdentifier: cellID, for: indexPath ) as! StudentCell
-
         let student = students[(indexPath as NSIndexPath).row]
-        
         cell.txtStudent.text = student.firstName + " " + student.lastName
 
         return cell
     }
-    
 }

@@ -12,18 +12,17 @@ import MapKit
 
 class DropPinMapView: UIViewController, MKMapViewDelegate
 {
+    // Classes
     var common : Common!
     var parse = ParseClient.sharedInstance()
     
-    var appDelegate: AppDelegate!
+    // Variables
+    var keyboardDisplayed = false
     var dropPinAnnotation = MKPointAnnotation()
-    
-    // Cooordinate should be set by Geocoding result from previous view.
     var dropPinCoordinate = CLLocationCoordinate2D()
     
-    // The map. See the setup in the Storyboard file. Note particularly that the view controller
-    // is set up as the map view's delegate.
-    
+    // Outlets for view objects
+    @IBOutlet weak var txtShareLink: UITextField!
     @IBOutlet weak var dropPinMapView: MKMapView!
     
     override func viewDidLoad()
@@ -42,12 +41,6 @@ class DropPinMapView: UIViewController, MKMapViewDelegate
         common.debug( message: "DropPinMapView::viewWillAppear()" )
     }
     
-    @IBAction func cancel(_ sender: Any)
-    {
-        common.debug( message: "DropPinMapView::cancel()" )
-        self.dismiss( animated: true )
-    }
-    
     // Load or reload the map annotation
     func refreshMap()
     {
@@ -57,21 +50,36 @@ class DropPinMapView: UIViewController, MKMapViewDelegate
 
     //        annotation.title = "\(first) \(last)"
     //       annotation.subtitle = mediaURL
-            
         performUIUpdatesOnMain
         {
-           self.dropPinMapView.addAnnotation(self.dropPinAnnotation)
+            self.dropPinMapView.addAnnotation( self.dropPinAnnotation )
         }
     }
    
+    @IBAction func postToMap(_ sender: Any)
+    {
+        common.debug( message: "DropPinMapView::postToMap()" )
+        // Here is where to logic to post the pin drop via Parse and
+        // pop back-to the Map View Controller will go.
+    }
+    
+    @IBAction func cancel(_ sender: Any)
+    {
+        common.debug( message: "DropPinMapView::cancel()" )
+        // Pop back to Drop Pin Start view ( Enter location )
+        if let navigationController = navigationController
+        {
+            navigationController.popViewController( animated: true )
+        }
+    }
+    
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector)
     {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+        NotificationCenter.default.addObserver( self, selector: selector, name: notification, object: nil )
     }
     
     func unsubscribeFromAllNotifications()
     {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver( self )
     }
-    
 }
