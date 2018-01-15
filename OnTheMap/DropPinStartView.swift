@@ -195,10 +195,10 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
         }
     }
     
-    @IBAction func userDidTapView(_ sender: AnyObject)
-    {
-        resignIfFirstResponder( txtLocation )
-    }
+    //@IBAction func userDidTapView(_ sender: AnyObject)
+    //{
+    //    resignIfFirstResponder( txtLocation )
+    //}
     
     func setUIEnabled(_ enabled: Bool)
     {

@@ -19,44 +19,65 @@ struct StudentInformation
     let mapString : String
     let mediaURL  : String
     let objectId  : String
-    let uniqueKey : String
+    var uniqueKey : String
     let updatedAt : String
     
     init( dictionary: [String:AnyObject] )
     {
         print ( "Called init" )
-        // Do to bad data - sometimes null values being returned - added checks to handle that
-        createdAt = dictionary[Constants.ParseAPI.ResponseKeys.CreatedAt] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.CreatedAt] as! String : ""
         
-        firstName = dictionary[Constants.ParseAPI.ResponseKeys.FirstName] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.FirstName] as! String : ""
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.CreatedAt] as? String
+        {    createdAt = s    }
+        else
+        {    createdAt = ""   }
+        
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.FirstName] as? String
+        {    firstName = s    }
+        else
+        {    firstName = ""   }
 
-        lastName = dictionary[Constants.ParseAPI.ResponseKeys.LastName] != nil ?
-                   dictionary[Constants.ParseAPI.ResponseKeys.LastName] as! String : ""
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.LastName] as? String
+        {    lastName = s    }
+        else
+        {    lastName = ""   }
+
+        if let n = dictionary[Constants.ParseAPI.ResponseKeys.Latitude] as? Double
+        {    latitude = n    }
+        else
+        {    latitude = 0.0  }
+
+        if let n = dictionary[Constants.ParseAPI.ResponseKeys.Longitude] as? Double
+        {    longitude = n    }
+        else
+        {    longitude = 0.0  }
         
-        latitude  = dictionary[Constants.ParseAPI.ResponseKeys.Latitude] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.Latitude] as! Double : 0.0
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.MapString] as? String
+        {    mapString = s    }
+        else
+        {    mapString = ""   }
         
-        longitude = dictionary[Constants.ParseAPI.ResponseKeys.Longitude] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.Longitude] as! Double : 0.0
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.MediaURL] as? String
+        {    mediaURL = s    }
+        else
+        {    mediaURL = ""   }
         
-        mapString = dictionary[Constants.ParseAPI.ResponseKeys.MapString] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.MapString] as! String : ""
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.ObjectID] as? String
+        {    objectId = s    }
+        else
+        {    objectId = ""   }
         
-        mediaURL  = dictionary[Constants.ParseAPI.ResponseKeys.MediaURL] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.MediaURL] as! String : ""
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.UniqueKey] as? String
+        {    uniqueKey = s    }
+        else
+        {    uniqueKey = ""   }
+
+        if let s = dictionary[Constants.ParseAPI.ResponseKeys.UpdateAt] as? String
+        {    updatedAt = s    }
+        else
+        {    updatedAt = ""   }
         
-        objectId  = dictionary[Constants.ParseAPI.ResponseKeys.ObjectID] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.ObjectID] as! String : ""
-        
-        uniqueKey = dictionary[Constants.ParseAPI.ResponseKeys.UniqueKey] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.UniqueKey] as! String : ""
-        
-        updatedAt = dictionary[Constants.ParseAPI.ResponseKeys.UpdateAt] != nil ?
-                    dictionary[Constants.ParseAPI.ResponseKeys.UpdateAt] as! String : ""
-    }
-    
+    }    
+   
     static func loadDictionaryFromResults(_ results: [[String:AnyObject]]) -> [StudentInformation]
     {
         print ( "Loading students from dictionary" )

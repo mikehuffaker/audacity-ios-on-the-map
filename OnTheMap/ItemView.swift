@@ -74,4 +74,24 @@ class ItemViewController: UITableViewController
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let student = students[indexPath.row]
+        print( "Student selected: \(student.firstName) \(student.lastName)" )
+        
+        let app = UIApplication.shared
+        let toOpen = student.mediaURL
+        print( "Student media link URL is: [\(student.mediaURL)] - attempting to open if valid ")
+        // Check to avoid errors with some invalid media URLs in student data
+        if toOpen.localizedCaseInsensitiveContains( "http" ) == true
+        {
+            let options = [:] as [String : Any]
+            app.open( URL(string: toOpen)!, options: options, completionHandler: nil )
+        }
+        else
+        {
+             common.showErrorAlert( vc: self, title: "Web Link Error", message: "This Student's DATA does not have a valid web URL", button_title: "OK" )
+        }
+    }
 }

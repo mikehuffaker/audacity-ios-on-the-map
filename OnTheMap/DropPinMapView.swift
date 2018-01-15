@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class DropPinMapView: UIViewController, MKMapViewDelegate
+class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
 {
     // Classes
     var common : Common!
@@ -28,10 +28,16 @@ class DropPinMapView: UIViewController, MKMapViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         common = Common()
         common.debug( message: "DropPinMapView::viewDidLoad()" )
 
+        txtShareLink.delegate = self
+        
+        subscribeToNotification(.UIKeyboardWillShow, selector: #selector(keyboardWillShow))
+        subscribeToNotification(.UIKeyboardWillHide, selector: #selector(keyboardWillHide))
+        subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
+        subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
+        
         refreshMap()
     }
     
@@ -82,4 +88,65 @@ class DropPinMapView: UIViewController, MKMapViewDelegate
     {
         NotificationCenter.default.removeObserver( self )
     }
+    
+    // Text Field Delegate Logic
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        // Only if the text field has is initial value, then null
+        // out when the user starts editing
+        if textField.text == "Enter a Link to Share Here"
+        {
+            textField.text = ""
+        }
+        
+        return
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func keyboardWillShow(_ notification: Notification)
+    {
+        if !keyboardDisplayed
+        {
+            view.frame.origin.y += keyboardHeight( notification )
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification)
+    {
+        if keyboardDisplayed
+        {
+            view.frame.origin.y -= keyboardHeight( notification )
+        }
+    }
+    
+    func keyboardDidShow(_ notification: Notification)
+    {
+        keyboardDisplayed = true
+    }
+    
+    func keyboardDidHide(_ notification: Notification)
+    {
+        keyboardDisplayed = false
+    }
+    
+    func keyboardHeight(_ notification: Notification) -> CGFloat
+    {
+        let userInfo = ( notification as NSNotification ).userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    func resignIfFirstResponder(_ textField: UITextField)
+    {
+        if textField.isFirstResponder
+        {
+            textField.resignFirstResponder()
+        }
+    }
+
 }
