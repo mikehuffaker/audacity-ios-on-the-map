@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X7N-bt-3eH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G18013" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X7N-bt-3eH">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -105,10 +105,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Q2N-YU-Z3O" firstAttribute="centerY" secondItem="ldy-1E-OEg" secondAttribute="centerY" constant="1" id="9Lj-r7-BtA"/>
                             <constraint firstItem="Q2N-YU-Z3O" firstAttribute="centerX" secondItem="ldy-1E-OEg" secondAttribute="centerX" constant="1" id="PuY-1i-7p9"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5Qi-Kh-cMh" appends="YES" id="lNM-Hg-14V"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="btnLogin" destination="Eom-0V-Pke" id="XIj-e4-lAv"/>
@@ -118,6 +122,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1y-ye-vd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5Qi-Kh-cMh">
+                    <connections>
+                        <action selector="userDidTapView:" destination="X7N-bt-3eH" id="C99-yh-WA8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-4196" y="267"/>
         </scene>
@@ -340,12 +349,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="tg8-Vz-xjJ" firstAttribute="top" secondItem="RLs-96-A1O" secondAttribute="bottom" constant="8" symbolic="YES" id="1QI-be-aHH"/>
                             <constraint firstItem="RLs-96-A1O" firstAttribute="leading" secondItem="Fbv-EW-iPR" secondAttribute="leadingMargin" constant="10" id="3jR-7L-Kae"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RLs-96-A1O" secondAttribute="trailing" constant="10" id="iQp-jY-YZo"/>
                             <constraint firstItem="RLs-96-A1O" firstAttribute="top" secondItem="JCp-Jr-RSO" secondAttribute="bottom" constant="8" symbolic="YES" id="uXm-Qt-VxQ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="rRT-PB-CO3" appends="YES" id="mJ6-ha-cDF"/>
+                        </connections>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
@@ -356,6 +369,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37M-wi-ZyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="rRT-PB-CO3">
+                    <connections>
+                        <action selector="userDidTapView:" destination="nvX-h2-GT9" id="Q6a-Sc-tpD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1277" y="267"/>
         </scene>
@@ -371,7 +389,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zM6-pU-Ftm" userLabel="StackViewMain">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zM6-pU-Ftm" userLabel="StackViewMain">
                                 <rect key="frame" x="30" y="20" width="354" height="708"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a Link to Share Here" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-Wl-khd" userLabel="txtShareLink">
@@ -385,16 +403,16 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wFI-vc-SM9">
-                                        <rect key="frame" x="0.0" y="100" width="354" height="508"/>
+                                        <rect key="frame" x="0.0" y="105" width="354" height="483"/>
                                         <connections>
                                             <outlet property="delegate" destination="tu8-p9-OOB" id="k8f-en-3hj"/>
                                         </connections>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-mz-1Mm" userLabel="btnPostToMap">
-                                        <rect key="frame" x="0.0" y="608" width="354" height="50"/>
+                                        <rect key="frame" x="0.0" y="593" width="354" height="55"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Sbe-6C-3uC"/>
+                                            <constraint firstAttribute="height" constant="55" id="Sbe-6C-3uC"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Post to Map"/>
@@ -403,10 +421,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20v-hR-czi" userLabel="btnCancel">
-                                        <rect key="frame" x="0.0" y="658" width="354" height="50"/>
+                                        <rect key="frame" x="0.0" y="653" width="354" height="55"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="26w-uD-kTu"/>
+                                            <constraint firstAttribute="height" constant="55" id="26w-uD-kTu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Cancel"/>
@@ -419,12 +437,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="zM6-pU-Ftm" firstAttribute="centerX" secondItem="tJB-1N-IdL" secondAttribute="centerX" id="665-1m-tIW"/>
                             <constraint firstItem="zM6-pU-Ftm" firstAttribute="top" secondItem="Aj9-Lx-VUG" secondAttribute="bottom" id="Gef-jm-eaG"/>
                             <constraint firstItem="2qJ-uF-ZIV" firstAttribute="top" secondItem="zM6-pU-Ftm" secondAttribute="bottom" constant="8" symbolic="YES" id="b3q-3k-ddA"/>
                             <constraint firstItem="zM6-pU-Ftm" firstAttribute="leading" secondItem="tJB-1N-IdL" secondAttribute="leadingMargin" constant="10" id="mwF-To-Io8"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="63M-q3-Cbm" appends="YES" id="4Zd-bP-GUl"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="dropPinMapView" destination="wFI-vc-SM9" id="Rcr-K4-216"/>
@@ -432,6 +454,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTd-Pn-Bag" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="63M-q3-Cbm">
+                    <connections>
+                        <action selector="userDidTapView:" destination="tu8-p9-OOB" id="UwV-S2-gFC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-422" y="267"/>
         </scene>

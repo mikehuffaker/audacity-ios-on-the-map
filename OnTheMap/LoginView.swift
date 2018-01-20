@@ -310,7 +310,7 @@ class LoginView: UIViewController, UITextFieldDelegate
         }
     }
     
-    @IBAction func userDidTapView(_ sender: AnyObject)
+    @IBAction func userDidTapView(_ sender: UITapGestureRecognizer)
     {
         resignIfFirstResponder(txtEmail)
         resignIfFirstResponder(txtPassword)

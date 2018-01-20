@@ -56,6 +56,13 @@ class MapView: UIViewController, MKMapViewDelegate
     {
         super.viewWillAppear( animated )
         common.debug( message: "MapView::viewWillAppear()" )
+        
+        // Bring Nav bar back if hidden
+        if let navigationController = self.navigationController
+        {
+            navigationController.isToolbarHidden = true
+            navigationController.isNavigationBarHidden = false
+        }
     }
     
     // If the PARSE data load has an error, this function will be called to display an alert in the view controller

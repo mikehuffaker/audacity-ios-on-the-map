@@ -46,27 +46,15 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
             navigationController.isNavigationBarHidden = true
         }
         
-        //subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityClientError ), selector: #selector( self.handleUdacityError ) )
-        //subscribeToNotification( NSNotification.Name( rawValue: Constants.Notifications.UdacityLoginComplete ), selector: #selector( self.completeLogin ) )
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear( animated )
         common.debug( message: "DropPinStartView::viewWillAppear()" )
+        
+        resignIfFirstResponder( txtLocation )
     }
-    
-    // If the Udacity login has an error, this function will be called to display an alert in the view controller and
-    // reenable the fields and controls so the user can try again.
-    //func handleUdacityError()
-    //{
-    //    performUIUpdatesOnMain
-    //    {
-    //        self.common.showErrorAlert( vc: self, title: "Udacity Error", message: self.udacity.lastError, button_title: "OK" )
-    //    }
-    //
-    //    setUIEnabled( true )
-    //}
     
     @IBAction func initiateGeocode(_ sender: Any)
     {
@@ -114,10 +102,8 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     {
         common.debug( message: "DropPinStartView::cancel()" )
         
-        // Pop back to Drop Pin Start view ( Enter location )
         if let navigationController = navigationController
         {
-            navigationController.isNavigationBarHidden = false
             navigationController.popViewController( animated: true )
         }
     }
@@ -156,6 +142,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func keyboardWillShow(_ notification: Notification)
     {
+        common.debug( message: "DropPinStartView::keyboardWillShow()" )
         if !keyboardDisplayed
         {
             view.frame.origin.y -= keyboardHeight( notification )
@@ -164,6 +151,7 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func keyboardWillHide(_ notification: Notification)
     {
+        common.debug( message: "DropPinStartView::keyboardWillHide()" )
         if keyboardDisplayed
         {
             view.frame.origin.y += keyboardHeight( notification )
@@ -172,11 +160,13 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
     
     func keyboardDidShow(_ notification: Notification)
     {
+        common.debug( message: "DropPinStartView::keyboardDidShow()" )
         keyboardDisplayed = true
     }
     
     func keyboardDidHide(_ notification: Notification)
     {
+        common.debug( message: "DropPinStartView::keyboardDidHide()" )
         keyboardDisplayed = false
     }
     
@@ -195,11 +185,11 @@ class DropPinStartView: UIViewController, UITextFieldDelegate
         }
     }
     
-    //@IBAction func userDidTapView(_ sender: AnyObject)
-    //{
-    //    resignIfFirstResponder( txtLocation )
-    //}
-    
+    @IBAction func userDidTapView(_ sender: UITapGestureRecognizer)
+    {
+        resignIfFirstResponder( txtLocation )
+    }
+
     func setUIEnabled(_ enabled: Bool)
     {
         common.debug( message: "DropPinStartView::setUIEnabled()" )

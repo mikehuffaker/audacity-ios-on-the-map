@@ -33,11 +33,6 @@ class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
 
         txtShareLink.delegate = self
         
-        subscribeToNotification(.UIKeyboardWillShow, selector: #selector(keyboardWillShow))
-        subscribeToNotification(.UIKeyboardWillHide, selector: #selector(keyboardWillHide))
-        subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
-        subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
-        
         refreshMap()
     }
     
@@ -54,8 +49,6 @@ class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
         
         dropPinAnnotation.coordinate = dropPinCoordinate
 
-    //        annotation.title = "\(first) \(last)"
-    //       annotation.subtitle = mediaURL
         performUIUpdatesOnMain
         {
             self.dropPinMapView.addAnnotation( self.dropPinAnnotation )
@@ -72,10 +65,12 @@ class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
     @IBAction func cancel(_ sender: Any)
     {
         common.debug( message: "DropPinMapView::cancel()" )
-        // Pop back to Drop Pin Start view ( Enter location )
+        
         if let navigationController = navigationController
         {
-            navigationController.popViewController( animated: true )
+            var viewControllers = navigationController.viewControllers
+            let origCallingVC = viewControllers[ viewControllers.count - 3 ]
+            navigationController.popToViewController ( origCallingVC, animated: true )
         }
     }
     
@@ -108,39 +103,6 @@ class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
         return true
     }
     
-    func keyboardWillShow(_ notification: Notification)
-    {
-        if !keyboardDisplayed
-        {
-            view.frame.origin.y += keyboardHeight( notification )
-        }
-    }
-    
-    func keyboardWillHide(_ notification: Notification)
-    {
-        if keyboardDisplayed
-        {
-            view.frame.origin.y -= keyboardHeight( notification )
-        }
-    }
-    
-    func keyboardDidShow(_ notification: Notification)
-    {
-        keyboardDisplayed = true
-    }
-    
-    func keyboardDidHide(_ notification: Notification)
-    {
-        keyboardDisplayed = false
-    }
-    
-    func keyboardHeight(_ notification: Notification) -> CGFloat
-    {
-        let userInfo = ( notification as NSNotification ).userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.cgRectValue.height
-    }
-    
     func resignIfFirstResponder(_ textField: UITextField)
     {
         if textField.isFirstResponder
@@ -149,4 +111,8 @@ class DropPinMapView: UIViewController, MKMapViewDelegate, UITextFieldDelegate
         }
     }
 
+    @IBAction func userDidTapView(_ sender: UITapGestureRecognizer)
+    {
+        resignIfFirstResponder( txtShareLink )
+    }
 }
